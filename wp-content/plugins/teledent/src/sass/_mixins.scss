@@ -1,0 +1,99 @@
+
+/* BREAKPOINTS
+----------------------------------------------*/
+
+$breakpoint-xsmall: 0px; // vertical alignment on small devices
+$breakpoint-small: 435px; // horizontal alignment on small devices
+$breakpoint-medium: 768px; // vertical alignment on medium devices
+$breakpoint-large: 1024px; // horizontal alignment on medium deviceson
+$breakpoint-xlarge: 1280px; // regular laptop
+$breakpoint-xxlarge: 1440px; //retina laptop
+
+
+/*
+ * Mixin for easy media queries
+ * @include bp(tablet) { SCSS here };
+*/
+@mixin bp($point) {
+ @if $point == biggie {
+     @media (max-width : $breakpoint-xxlarge) { @content; }
+ }
+ @if $point == tablet {
+     @media (max-width : $breakpoint-large) { @content; }
+ }
+ @else if $point == phone {
+     @media (max-width : $breakpoint-small) { @content; }
+ }
+}
+
+
+/*
+ * Mixin for clearfix
+ * @include clearfix;
+*/
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+        width: 100%;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+/*
+ * Vertical Alignment via table middle
+ * @include clearfix;
+*/
+
+@mixin vertical-align($position) {
+    display: table;
+    table-layout: fixed;
+    div, p {
+        display: table-cell;
+        vertical-align: $position;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@-webkit-keyframes scaleGrowAnimation {
+    0% {
+        background-size: 30%;
+    }
+    50% {
+        background-size: 28%;
+    }
+    100% {
+        background-size: 30%;
+    }
+}
+
+/* Standard syntax */
+@keyframes scaleGrowAnimation {
+    0% {
+        background-size: 30%;
+    }
+    50% {
+        background-size: 28%;
+    }
+    100% {
+        background-size: 30%;
+    }
+}
+
+/* COLORS
+----------------------------------------------*/
+
+$black: #000000;
+$camerons-orange: #E75300;
+$camerons-gray-medium: #E2E3E4;
+$camerons-gray-dark: #5C5D61;
+$camerons-gray-text: #808080;
+$camerons-gray-text-alt: #8E8E8E;
+$camerons-blue-dark: #1D2326;
+$camerons-blue-black: #262F32;
+$camerons-gray-light: #F4F4F4;

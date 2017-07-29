@@ -1,0 +1,126 @@
+    /*
+     * @font-face mixin
+     * Bulletproof font-face via Font Squirrel
+     * @include fontface('family', 'assets/fonts/', 'myfontname');
+     */
+
+    @mixin fontface($font-family, $font-url, $font-name) {
+        @font-face {
+            font: {
+                family: $font-family;
+                style: normal;
+                weight: normal;
+            }
+            src: url($font-url + '/' + $font-name + '.eot');
+            src: url($font-url + '/' + $font-name + '.eot#iefix') format('embedded-opentype'),
+                 url($font-url + '/' + $font-name + '.woff') format('woff'),
+                 url($font-url + '/' + $font-name + '.ttf')  format('truetype'),
+                 url($font-url + '/' + $font-name + '.svg#' + $font-name) format('svg');
+        }
+    }
+
+    $global-font-size: 1rem;
+
+    //Headings
+
+    $h-xlarge: 1.95rem;
+    $h-large: 1.85rem;
+    $h-medium: 1.35rem;
+    $h-small: 1.15rem;
+    $h-xsmall: 1rem;
+    $h-xxsmall: 0.889rem;
+
+    //Texts
+    $t-xlarge: 1.5rem;
+    $t-large: 1rem;
+    $t-medium: 0.85rem;
+    $t-small: 0.80rem;
+    $t-xsmall: 0.78rem;
+
+    //Headings
+
+    @mixin h-xlarge  {
+        font-size: $h-xlarge;
+        line-height: $h-xlarge * 1.3;
+        @media (max-width: $mobile-max) {
+            font-size:  $h-xlarge - 0.3rem;
+            line-height: ($h-xlarge - 0.3rem) * 1.3;
+        }
+    }
+
+    @mixin h-large {
+        font-size: $h-large;
+        line-height: $h-large * 1.3;
+        @media (max-width: $mobile-max) {
+            font-size:  $h-large - 0.3rem;
+        }
+
+    }
+
+    @mixin h-medium {
+        font-size: $h-medium;
+        line-height: $h-medium * 1.3;
+        @media (max-width: $mobile-max) {
+            font-size: $h-medium - 0.3rem;
+        }
+    }
+
+    @mixin h-small {
+        font-size: $h-small;
+        line-height: $h-small * 1.3;
+        @media (max-width: $mobile-max) {
+            font-size: $h-small - 0.2rem;
+        }
+    }
+
+    @mixin h-xsmall {
+        font-size: $h-xsmall;
+        line-height: $h-xsmall * 1.3;
+        @media (max-width: $mobile-max) {
+            font-size: $h-xsmall - 0.2rem;
+        }
+    }
+
+    @mixin h-xxsmall {
+        font-size: $h-xxsmall;
+        line-height: $h-xxsmall * 1.5;
+        @media (max-width: $mobile-max) {
+            font-size: $h-xxsmall - 0.2rem;
+        }
+    }
+
+    //Texts
+
+    @mixin t-xlarge {
+        font-size: $t-xlarge;
+        line-height: $t-xlarge * 1.5;
+        @media (max-width: $mobile-max) {
+            font-size: $t-xlarge - 0.2rem;
+        }
+    }
+
+    @mixin t-large {
+        font-size: $t-large;
+        line-height: $t-large * 1.5;
+        @media (max-width: $mobile-max) {
+            font-size: $t-large - 0.2rem;
+        }
+    }
+
+    @mixin t-medium {
+        font-size: $t-medium;
+        line-height: $t-medium * 1.5;
+        @media (max-width: $mobile-max) {
+            font-size: $t-medium - 0.2rem;
+        }
+    }
+
+    @mixin t-small {
+        font-size: $t-small;
+        line-height: $t-small * 1.4;
+    }
+
+    @mixin t-xsmall {
+        font-size: $t-xsmall;
+        line-height: $t-xsmall * 1.5;
+    }

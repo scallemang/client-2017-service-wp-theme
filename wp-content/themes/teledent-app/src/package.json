@@ -1,0 +1,40 @@
+{
+  "name": "libertyridge-wordpress",
+  "version": "1.0.0",
+  "description": "Liberty Ridge Homes custom theme (salient)",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build --production"
+  },
+  "author": "Brainrider Inc. <web@brainrider.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cache": "^0.4.4",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.1",
+    "panini": "^1.3.0",
+    "run-sequence": "^1.1.5",
+    "style-sherpa": "^1.0.1",
+    "tiny-lr": "^0.2.1",
+    "yargs": "^4.4.0"
+  },
+  "bugs": {
+    "email": "web@brainrider.com"
+  },
+  "private": true
+}

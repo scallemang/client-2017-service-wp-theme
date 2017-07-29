@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Base / suggestions only
+   ========================================================================== */
+
+*, div, nav, body, span, a, ul, li, img {
+    -webkit-transition: all ease-out 285ms;
+    -moz-transition: all ease-out 285ms;
+    -o-transition: all ease-out 285ms;
+    transition: all ease-out 285ms;
+}
+
+::-moz-selection,
+::selection {
+	color: $black;
+    background: $grey-light;
+    text-shadow: none;
+}
+
+/* ==========================================================================
+   Border-box all the things!
+   ========================================================================== */
+
+*,
+:before,
+:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+a:link,
+a:visited {
+    color: $primary;
+    text-decoration: none;
+	transition: all .3s ease;
+}
+a:active,
+a:hover {
+    color: $brand-light;
+    text-decoration: none;
+}
+
+a.button {
+	color: $brand-light;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    clear: both;
+}
+
+h1,
+h1.page-title { //good to have h1.page-title case normnalizer is breaking it
+    @include h-large;
+}
+h2 {
+    @include h-large;
+    color: $brand-dark;
+}
+h3 {
+    @include h-medium;
+    font-weight: 200;
+}
+h4 {
+    @include h-small;
+}
+h5 {
+    @include h-xsmall;
+}
+
+p {
+    @include t-large;
+    margin-bottom: 1.5rem;
+}
+
+cite {
+    @include t-xsmall;
+}
+
+strong {
+    font-weight: 600 !important;
+}
+
+address {
+    margin: 0 0 1.5rem;
+}
+
+abbr[title] { // address styling not present in IE 8/9/10/11, Safari, and Chrome
+	border-bottom: 1px dotted;
+	text-decoration: none; // remove the nasty underline from normalizer
+}
+
+b,
+strong { // address style set to `bolder` in Firefox 4+, Safari, and Chrome
+	font-weight: bold;
+}
+
+dfn { // address styling not present in Safari and Chrome
+	font-style: italic;
+}
+
+.highlight,
+mark { // address styling not present in IE 8/9
+	background: $grey-light;
+    box-shadow: 0.2em 0 0 $grey-light, -0.2em 0 0 $grey-light;
+    padding: 0.1em 0;
+}
+
+small { // address inconsistent and variable font size in all browsers
+	//font-size: 80%;
+	@include t-xsmall;
+}
+
+sub,
+sup { // prevent `sub` and `sup` affecting `line-height` in all browsers
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5rem;
+}
+sub {
+	bottom: -0.25rem;
+}
+
+blockquote,
+blockquote p {
+    @include t-medium;
+	background-color: $grey-light;
+	border-left: 0.5em solid $grey-dark;
+	margin: 1.7rem 1.5rem;
+	padding: 0.5rem 1rem;
+	quotes: "\201C""\201D""\2018""\2019";
+	font-style: italic;
+	span {
+		color:  $grey-dark;
+	}
+}
+blockquote:before {
+	color: $grey-dark;
+	content: open-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	vertical-align: -0.4em;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+/* ==========================================================================
+   Clears
+   ========================================================================== */
+
+.clear:before,
+.clear:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-header:before,
+.site-header:after,
+.site-content:before,
+.site-content:after,
+.site-footer:before,
+.site-footer:after {
+    content: '';
+    display: table;
+}
+
+.clear:after,
+.entry-content:after,
+.comment-content:after,
+.site-header:after,
+.site-content:after,
+.site-footer:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   Margins
+   ========================================================================== */
+
+.margin-top-xxxsmall { margin-top: 0.938rem; }
+.margin-top-xxsmall { margin-top: 1.25rem; }
+.margin-top-xsmall { margin-top: 1.5rem; }
+.margin-top-small { margin-top: 1.75rem; }
+.margin-top-medium { margin-top: 2rem; }
+.margin-top-large { margin-top: 2.25rem; }
+.margin-top-xlarge { margin-top: 2.5rem; }
+.margin-top-xxlarge { margin-top: 2.75rem; }
+.margin-top-xxxlarge { margin-top: 3rem; }
+
+.margin-bottom-xxxsmall { margin-bottom: 0.938rem; }
+.margin-bottom-xxsmall { margin-bottom: 1.25rem; }
+.margin-bottom-xsmall { margin-bottom: 1.5rem; }
+.margin-bottom-small { margin-bottom: 1.75rem; }
+.margin-bottom-medium { margin-bottom: 2rem; }
+.margin-bottom-large { margin-bottom: 2.25rem; }
+.margin-bottom-xlarge { margin-bottom: 2.5rem; }
+.margin-bottom-xxlarge { margin-bottom: 2.75rem; }
+.margin-bottom-xxxlarge { margin-bottom: 3rem; }
+
+
+/* ==========================================================================
+   Padding
+   ========================================================================== */
+
+.padding-top-xxxsmall { padding-top: 0.938rem; }
+.padding-top-xxsmall { padding-top: 1.25rem; }
+.padding-top-xsmall { padding-top: 1.5rem; }
+.padding-top-small { padding-top: 1.75rem; }
+.padding-top-medium { padding-top: 2rem; }
+.padding-top-large { padding-top: 2.25rem; }
+.padding-top-xlarge { padding-top: 2.5rem; }
+.padding-top-xxlarge { padding-top: 2.75rem; }
+.padding-top-xxxlarge { padding-top: 3rem; }
+
+.padding-bottom-xxxsmall { padding-bottom: 0.938rem; }
+.padding-bottom-xxsmall { padding-bottom: 1.25rem; }
+.padding-bottom-xsmall { padding-bottom: 1.5rem; }
+.padding-bottom-small { padding-bottom: 1.75rem; }
+.padding-bottom-medium { padding-bottom: 2rem; }
+.padding-bottom-large { padding-bottom: 2.25rem; }
+.padding-bottom-xlarge { padding-bottom: 2.5rem; }
+.padding-bottom-xxlarge { padding-bottom: 2.75rem; }
+.padding-bottom-xxxlarge { padding-bottom: 3rem; }
+
+/* ==========================================================================
+   WP Alignment
+   ========================================================================== */
+
+.alignleft {
+    display: inline;
+    float: left;
+    margin-right: 1.5rem;
+}
+.alignright {
+    display: inline;
+    float: right;
+    margin-left: 1.5rem;
+}
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Images
+   ========================================================================== */
+
+img {
+	height: auto; // makes sure images are scaled correctly
+	max-width: 100%; // adhere to container width
+}
+
+p img {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+audio,
+canvas,
+img,
+video { //remove the gap between images, videos, audio and canvas and the bottom of their containers
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   Videos (responsive)
+   ========================================================================== */
+
+.video-container {
+	position: relative;
+	//padding-bottom: 56.25%; // with the letterboxing for some videos
+	padding-bottom: 50%; // without the nasty letterboxing of the old video
+	padding-top: 30px;
+	//margin: 1.5rem 0;
+	height: 0;
+	overflow: hidden;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.entry-content img,
+.entry-content iframe,
+.entry-content object,
+.entry-content embed {
+	max-width: 100%;
+}
+
+/* ==========================================================================
+   Accessiblity
+   ========================================================================== */
+
+/* Text meant only for screen readers */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000; // above WP toolbar
+}
+
+

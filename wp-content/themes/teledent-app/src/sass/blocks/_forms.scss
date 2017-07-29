@@ -1,0 +1,23 @@
+/// Form Fieldset
+/// @group Element Block
+/// @name fieldset
+	fieldset { //remove default fieldset styles
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+/// Form Textarea
+/// @group Element Block
+/// @name textarea
+	textarea { //Allow only vertical resizing of textareas
+		resize: vertical;
+	}
+
+/// Form Select
+/// @group Element Block
+/// @name fieldset
+	select[multiple] {
+		height: auto;
+		background-image: none;
+	}

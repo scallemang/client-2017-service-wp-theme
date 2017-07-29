@@ -1,0 +1,47 @@
+/// Footer Navigation - consist of widgets, heading styles overwrite salient options
+/// @group Component Block
+/// @name footer
+
+.newsFeed {
+	.blog-recent[data-style*="classic_enhanced"] {
+		.col {
+			margin-bottom: 0;
+		}
+		.inner-wrap {
+			box-shadow: none !important;
+			padding-bottom: 0 !important;
+			border-radius: 0;
+			span.meta-category {
+				display: none;
+			}
+			div.article-content-wrap {
+				padding: 0 !important;
+				div.post-header {
+					span.meta {
+						display: none;
+					}
+					h3.title {
+						@include t-large;
+						margin-top: 12px;
+						text-transform: none;
+						color: $brand-light;
+					}
+				}
+				div.excerpt {
+					p {
+						@include t-medium;
+					}
+					div.addtoany_share_save_container {
+						display: none;
+					}
+				}
+			}
+			div.post-meta {
+				display: none;
+			}
+			a.link-read-more {
+				text-decoration: underline;
+			}
+		}
+	}
+}

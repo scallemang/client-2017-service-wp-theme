@@ -1,0 +1,16 @@
+.team-member[data-style="bio_fullscreen"] {
+	.team-meta {
+		bottom: -26px !important;
+		background-color: $grey-dark;
+		h3 {
+			@include h-small;
+			color: $brand-dark;
+			font-weight: 400;
+			opacity: 1;
+			margin: 0;
+		}
+		p {
+			opacity: 1;
+		}
+	}
+}

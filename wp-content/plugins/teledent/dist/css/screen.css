@@ -1,0 +1,35 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* BREAKPOINTS
+----------------------------------------------*/
+/*
+ * Mixin for easy media queries
+ * @include bp(tablet) { SCSS here };
+*/
+/*
+ * Mixin for clearfix
+ * @include clearfix;
+*/
+/*
+ * Vertical Alignment via table middle
+ * @include clearfix;
+*/
+@-webkit-keyframes scaleGrowAnimation {
+  0% {
+    background-size: 30%; }
+  50% {
+    background-size: 28%; }
+  100% {
+    background-size: 30%; } }
+/* Standard syntax */
+@keyframes scaleGrowAnimation {
+  0% {
+    background-size: 30%; }
+  50% {
+    background-size: 28%; }
+  100% {
+    background-size: 30%; } }
+/* COLORS
+----------------------------------------------*/

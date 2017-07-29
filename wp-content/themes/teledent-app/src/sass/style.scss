@@ -1,0 +1,19 @@
+/*
+Theme: Liberty Ridge Homes
+Author: Brainrider Inc.
+Description: Liberty Ridge child theme custom styles. Build load order.
+Version: 3.0
+
+DO NOT EDIT ORDER OF FILES
+*/
+
+//Import Vendor Styles
+@charset 'utf-8';
+
+//Wrapper ID for strong specificity
+#brwp {
+    // Reset, Variables, Mixins, Etc
+    @import "atoms";
+    @import "blocks";
+    @import "templates";
+}

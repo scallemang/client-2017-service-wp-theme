@@ -111,6 +111,13 @@ if(!class_exists('Teledent')) {
 
 					  //Make new Applicant Post Type
 						$post_meta = array(
+							'applicant_first_name' => $first_name,
+							'applicant_last_name' => $last_name,
+							'applicant_gender' => $gender,
+							'applicant_fax' => $fax,
+							'applicant_primary_phone' => $primary_phone,
+							'applicant_secondary_phone' => $secondary_phone,
+							'applicant_email' => $secondary_email,
 							'applicant_street_name' => $street_name,
 							'applicant_street_number' => $street_number,
 							'applicant_unit_number' => $unit_number,
@@ -120,12 +127,12 @@ if(!class_exists('Teledent')) {
 						);
 
 						$new_post = array(
-							'post_content' => 'registrant',
+							'post_content' => 'CONFIRMED',
 							'post_status' => 'draft',
 							'post_date' => date('Y-m-d H:i:s'),
 							'post_author' => $user_id,
 							'post_type' => $user_type,
-							'post_meta' => $post_meta
+							'meta_input' => $post_meta
 						);
 				
 						$applicant_post_id = wp_insert_post($new_post);

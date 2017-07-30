@@ -20,13 +20,14 @@ var PATHS = {
     'sass/**/*.scss'
   ],
   css: [
-  	'node_modules/bootstrap/dist/css/bootstrap.min.css',
-  	'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+  	'node_modules/bootstrap/dist/css/bootstrap.css',
+  	'node_modules/bootstrap/dist/css/bootstrap-theme.css',
   ],
   plugins: [
     'node_modules/bowser/bowser.js',
     'node_modules/angular/angular.js',
-    'node_modules/bootstrap/dist/js/bootstrap-theme.min.js',
+    'node_modules/ng-file-upload/dist/ng-file-upload-all.js',
+    'node_modules/angular-bootstrap/ui-bootstrap.js',
   ],
   localjs: [
     'js/ControllerRegister.js'

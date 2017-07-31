@@ -79,11 +79,17 @@ if(!class_exists('Teledent')) {
 				}
 
 			//Register AJAX callback functions
-				add_action( 'wp_ajax_prepDomAction', 'teledent_fn_registration' );
-				add_action( 'wp_ajax_nopriv_prepDomAction', 'teledent_fn_registration' );
+				add_action( 'wp_ajax_prepDomAction', 'teledent_fn_createApplicant' );
+				add_action( 'wp_ajax_nopriv_prepDomAction', 'teledent_fn_createApplicant' );
+
+				add_action( 'wp_ajax_createOffice', 'teledent_fn_createOffice' );
+				add_action( 'wp_ajax_nopriv_createOffice', 'teledent_fn_createOffice' );
+
+				add_action( 'wp_ajax_uploadFile', 'teledent_fn_upload' );
+				add_action( 'wp_ajax_nopriv_uploadFile', 'teledent_fn_upload' );
 
 			//Define Shortcode handlers
-			function teledent_form_login($atts) {}
+				function teledent_form_login($atts) {}
 			
 			//Define Shortcode handler function, and set global attributes
 				function teledent_form_registration($atts) {
@@ -92,10 +98,25 @@ if(!class_exists('Teledent')) {
 
 				}
 
-			//Prep Data Object to pass to DOM
-				function teledent_fn_registration() {
 
-					global $wpdb; // this is how you get access to the database
+			//Prep Data Object to pass to DOM
+
+
+				function teledent_fn_startSignup() {
+					return username_exists( $email_address );
+				}
+
+				function teledent_fn_upload() {
+				  $meta = $_GET;
+				  $filename = $meta['file']['name'];
+				  $destination = $meta['targetPath'] . $filename;
+				  move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+
+				  var_dump($_GET);
+				}
+
+
+				function teledent_fn_createApplicant() {
 
 					extract($_GET);
 
@@ -111,26 +132,32 @@ if(!class_exists('Teledent')) {
 
 					  //Make new Applicant Post Type
 						$post_meta = array(
+							'applicant_type' => $user_type,
 							'applicant_first_name' => $first_name,
 							'applicant_last_name' => $last_name,
 							'applicant_gender' => $gender,
-							'applicant_fax' => $fax,
 							'applicant_primary_phone' => $primary_phone,
 							'applicant_secondary_phone' => $secondary_phone,
-							'applicant_email' => $secondary_email,
-							'applicant_street_name' => $street_name,
-							'applicant_street_number' => $street_number,
-							'applicant_unit_number' => $unit_number,
+							'applicant_email' => $email_address,
+							'applicant_address' => $address,
 							'applicant_city' => $city,
 							'applicant_province' => $province,
 							'applicant_postal_code' => $postal_code,
+							'applicant_work_types' => json_decode($work_types),
+							'applicant_contract_type' => json_decode($contract_type),
+							'applicant_commute' => $commute,
+							'applicant_locations' => json_decode($locations),
+							'applicant_salary' => $salary
 						);
 
+						$post_content = $last_name . ', ' . $first_name . ' - ' . $email_address; 
+
 						$new_post = array(
-							'post_content' => 'CONFIRMED',
+							'post_content' => $post_content,
 							'post_status' => 'draft',
 							'post_date' => date('Y-m-d H:i:s'),
 							'post_author' => $user_id,
+							'post_title' => $post_content,
 							'post_type' => $user_type,
 							'meta_input' => $post_meta
 						);
@@ -141,7 +168,10 @@ if(!class_exists('Teledent')) {
 						wp_update_user(
 							array(
 						  		'ID'          =>    $user_id,
-						  		'user_nicename'    =>    $applicant_post_id
+						  		'user_nicename'    =>    $applicant_post_id,
+						  		'first_name'    =>    $first_name,
+						  		'last_name'    =>    $last_name,
+						  		'description'    =>    $post_content
 							)
 						);
 
@@ -152,6 +182,69 @@ if(!class_exists('Teledent')) {
 
 					wp_die(); // this is required
 				}
+
+					function teledent_fn_createOffice() {
+
+					extract($_GET);
+
+					if( null == username_exists( $email_address ) ) {
+
+					  // Generate the password and create the user
+					  $password = wp_generate_password( 12, false );
+					  $user_id = wp_create_user( $email_address, $password, $email_address );
+
+					  // Set the role
+					  $user = new WP_User( $user_id );
+					  $user->set_role( $user_type );
+
+					  //Make new Applicant Post Type
+						$post_meta = array(
+							'applicant_type' => $user_type,
+							'applicant_office_name' => $office_name,
+							'applicant_contact_name' => $contact_name,
+							'applicant_primary_phone' => $primary_phone,
+							'applicant_secondary_phone' => $secondary_phone,
+							'applicant_email' => $email_address,
+							'applicant_address' => $address,
+							'applicant_city' => $city,
+							'applicant_work_types' => json_decode($work_types),
+							'applicant_contract_type' => json_decode($contract_type),
+							'applicant_salary' => $salary
+						);
+
+						$post_content = $office_name . ', ' . $city . ' - ' . $email_address; 
+
+						$new_post = array(
+							'post_content' => $post_content,
+							'post_status' => 'draft',
+							'post_date' => date('Y-m-d H:i:s'),
+							'post_author' => $user_id,
+							'post_title' => $post_content,
+							'post_type' => $user_type,
+							'meta_input' => $post_meta
+						);
+				
+						$applicant_post_id = wp_insert_post($new_post);
+
+						// Set the nickname
+						wp_update_user(
+							array(
+						  		'ID'          =>    $user_id,
+						  		'user_nicename'    =>    $applicant_post_id,
+						  		'first_name'    =>    $first_name,
+						  		'last_name'    =>    $last_name,
+						  		'description'    =>    $post_content
+							)
+						);
+
+					  // Email the user
+					  wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+
+					}
+
+					wp_die(); // this is required
+				}
+
 
 			//Enqueue scripts
 				function t_enqueue() {

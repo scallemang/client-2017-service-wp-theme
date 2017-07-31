@@ -5,7 +5,7 @@ jQuery("document").ready(function(){
 
     //Parent Theme DOM Overrides
     (function(){
-            var slugname = 'brwp';
+            var slugname = 'teledent';
             jQuery('html').attr('id', slugname);
     })();
 

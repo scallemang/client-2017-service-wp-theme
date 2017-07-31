@@ -1,6 +1,6 @@
-angular.module('teledent', [])
+angular.module('teledent', ['ngFileUpload'])
 .controller('RegistrationController', 
-    ['$scope', '$http','$window', function($scope, $http, $window) {
+    ['$scope', '$http','$window', 'Upload', function($scope, $http, $window, Upload) {
 
   // $scope.ajaxurl = $window.ajaxurl;
 
@@ -197,8 +197,9 @@ angular.module('teledent', [])
   $scope.actionRegister = function(user) {
 
     $scope.master = angular.copy(user);
-	  //ajax - create user, 
-    $scope.formState = 'applicant';
+	  // console.log('user_type',$scope.master.user.user_type);
+    $scope.formState = user.user_type;
+    // $scope.formState = 'office';
 	
   };
 
@@ -210,18 +211,22 @@ angular.module('teledent', [])
           'url': '/wp-admin/admin-ajax.php', 
           'params': {
               'action': 'prepDomAction',
+              'user_type': $scope.master.user_type,
               'first_name': $scope.master.first_name,
               'last_name': $scope.master.last_name,
               'email_address': $scope.master.email_address,
               'gender': $scope.master.gender.name,
               'primary_phone': $scope.master.primary_phone,
               'secondary_phone': $scope.master.secondary_phone,
-              'street_name': $scope.master.street_name,
-              'street_number': $scope.master.street_number,
-              'unit_number': $scope.master.unit_number,
+              'address': $scope.master.address,
               'city': $scope.master.city,
+              'postal_code': $scope.master.postal_code,
               'province': $scope.master.province.name,
-              'postal_code': $scope.master.postal_code
+              'work_types': $scope.master.work_types,
+              'contract_type': $scope.master.contract_type,
+              'commute': $scope.master.commute,
+              'locations': $scope.master.locations,
+              'salary': $scope.master.salary
           }
         }
       )
@@ -232,6 +237,74 @@ angular.module('teledent', [])
       });
 
   };
+
+  $scope.actionOffice = function(user) {
+    $scope.master = angular.copy(user);
+
+    $http({
+          'method': 'POST',
+          'url': '/wp-admin/admin-ajax.php', 
+          'params': {
+              'action': 'createOffice',
+              'user_type': $scope.master.user_type,
+              'office_name': $scope.master.office_name,
+              'contact_name': $scope.master.contact_name,
+              'email_address': $scope.master.email_address,
+              'primary_phone': $scope.master.primary_phone,
+              'secondary_phone': $scope.master.secondary_phone,
+              'address': $scope.master.address,
+              'work_types': $scope.master.work_types,
+              'contract_type': $scope.master.contract_type,
+              'salary': $scope.master.salary
+          }
+        }
+      )
+      .then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log('error: ',response);
+      });
+
+  };
+
+    // upload later on form submit or something similar
+    $scope.submitFile = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
+      }
+    };
+
+    // upload later on form submit or something similar
+    $scope.emailCheck = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
+      }
+    };
+
+    // upload on file select or drop
+    $scope.upload = function (file) {
+        
+        Upload.upload({
+            url: '/wp-admin/admin-ajax.php', 
+            method: 'POST',
+            file: file,
+            data: {
+              targetPath : '/wp-content/plugins/resumes/',
+              file: file
+            },
+            'params': {
+              'action': 'fileUpload'
+            },
+        }).then(function (resp) {
+            console.log(resp);
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
 
   $scope.reset = function() {
     $scope.user = angular.copy($scope.master);

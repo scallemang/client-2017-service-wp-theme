@@ -8,7 +8,8 @@
   		<div class="col-sm-12">
     
         	<form novalidate 
-        		class="form-horizontal">
+        		class="form-horizontal"
+            name="teledent-registration">
          		
             <!-- INITIAL State, core account details (email and usertype) -->
         		<ng-include 
@@ -18,6 +19,11 @@
             <!-- APPLICANT State, further account details -->
 				    <ng-include 
               src="'/wp-content/plugins/teledent/templates-parts/form-user-applicant.php'">
+            </ng-include>
+
+            <!-- OFFICE State, further account details -->
+            <ng-include 
+              src="'/wp-content/plugins/teledent/templates-parts/form-user-office.php'">
             </ng-include>
 
         	</form>

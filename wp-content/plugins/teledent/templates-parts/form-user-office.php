@@ -1,11 +1,11 @@
 <content 
-	ng-if="formState == 'applicant'">
-	<h2>Applicant Registration</h2>
+	ng-if="formState == 'office'">
+	<h2>Office Registration</h2>
 
 	<!-- BEGIN APPLICANT DETAILS -->
 	<fieldset>
 		<div id="legend">
-			<legend class="">Applicant Details</legend>
+			<legend class="">Office Details</legend>
 		</div>
 
 		<div class="container">
@@ -30,33 +30,33 @@
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="first_name">First Name</label>
+							for="office_name">Office Name</label>
 						<div class="controls">
 							<input type="text" 
-								id="first_name"
-								ng-model="user.first_name"
+								id="office_name"
+								ng-model="user.office_name"
 								required 
-								name="first_name" 
-								placeholder="What should we call you?" 
+								name="office_name" 
+								placeholder="What is your office name?" 
 								class="form-control input-lg"
 								tabindex="2">
-							<p class="help-block">First Name is a required field.</p>
+							<p class="help-block">Office Name is a required field.</p>
 						</div>
 					</div>
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="last_name">Last Name</label>
+							for="contact_name">Contact Name</label>
 						<div class="controls">
 							<input type="text" 
-								id="last_name"
-								ng-model="user.last_name"
+								id="contact_name"
+								ng-model="user.contact_name"
 								required 
-								name="last_name" 
-								placeholder="Your last name" 
+								name="contact_name" 
+								placeholder="Who can we contact?" 
 								class="form-control input-lg"
 								tabindex="3">
-							<p class="help-block">Last Name is a required field.</p>
+							<p class="help-block">A contact name is a required field.</p>
 						</div>
 					</div>
 
@@ -91,24 +91,6 @@
 							<p class="help-block">Secondary Phone is a required field.</p>
 						</div>
 					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="gender">Gender</label>
-						<div class="controls">
-							<select 
-								id="gender"
-								ng-model="user.gender"
-								ng-options="gender.name for gender in genderList"
-								required 
-								name="gender"
-								placeholder="Select gender"
-								class="form-control input-lg"
-								tabindex="7" />
-							<p class="help-block">This field is not mandatory. We do not screen applicants based on gender or any of the other prohibited grounds listed under the Ontario Human Rights Code.</p>
-						</div>
-					</div>
-
 
 				</div>   
 			</div>
@@ -160,24 +142,6 @@
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="province">Province *</label>
-						<div class="controls">
-							<select 
-								id="province"
-								ng-model="user.province"
-								ng-options="province.name for province in provList"
-
-								required 
-								name="province"
-								placeholder="Select province"
-								class="form-control input-lg"
-								tabindex="10"/>
-							<p class="help-block">Province is a required field.</p>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
 							for="postal_code">Postal Code *</label>
 						<div class="controls">
 							<input type="type" 
@@ -211,7 +175,7 @@
 					<!-- TYPE OF QUALIFICATIONS -->
 					<div class="form-group">
 					  <label for="locations" 
-					  	class="form-label col-sm-12">What type of dental professional do you consider yourself to be?</label>
+					  	class="form-label col-sm-12">What type of dental professional do you need to hire?</label>
 					  <div class=" col-sm-12 required">
 					    <div class="checkbox"
 					    	ng-repeat="qualification in workTypesList">
@@ -225,14 +189,14 @@
 					      </label>
 					    </div>
 					    </div>
-						<p class="help-block">You can only choose one option. If you consider yourself part of more than one category then pick the category in which you feel your current skills are strongest.</p>
+						<p class="help-block">You can only choose one option.</p>
 					  </div>
 					</div>
 
 					<!-- TYPE OF WORK -->
 					<div class="form-group">
 					  <label for="contract_type" 
-					  	class="col-sm-12">What type of working are you looking for?</label>
+					  	class="col-sm-12">What type of working are you position are you filling?</label>
 					  <div class=" col-sm-12 required">
 					    <div class="checkbox"
 					    	ng-repeat="contract_type in contractTypesList">
@@ -249,60 +213,10 @@
 					  </div>
 					</div>
 
-					<!-- VEHICLE & VALID DRIVERS LICENSE -->
-					<div class="form-group">
-					  <label for="commute" 
-					  	class="form-label col-sm-12">How will you get to work?</label>
-					  <div class=" col-sm-12 required">
-					    <div class="radio">
-					      <label class="radio-custom clearfix" 
-					      	data-initialize="radio" 
-					      	id="checkbox-commute-driving">
-					        <input type="radio" 
-								ng-model="user.commute"
-								value="commute" />
-					        <span class="radio-label">Driving</span>
-					      </label>
-					  	</div>
-					  	<div class="radio">
-					      <label class="radio-custom clearfix" 
-					      	data-initialize="radio" 
-					      	id="radio-commute-transit">
-					        <input type="radio" 
-								ng-model="user.commute"
-								value="transit" />
-					        <span class="radio-label">Transit</span>
-					      </label>
-					    </div>
-					    </div>
-						<p class="help-block"></p>
-					  </div>
-					</div>
-
-					<!-- LOCATIONS -->
-					<div class="form-group">
-					  <label for="locations" 
-					  	class="col-sm-12">Where are you able to work?</label>
-					  <div class=" col-sm-12 required">
-					    <div class="checkbox"
-					    	ng-repeat="location in locationList">
-					      <label class="radio-custom clearfix" 
-					      	data-initialize="checkbox" 
-					      	id="checkbox-locations">
-					        <input type="checkbox" 
-								ng-model="user.location[location.name]" />
-					        <span class="checkbox-label">{{location.name}}</span>
-					      </label>
-					    </div>
-					    </div>
-					    <p class="help-block"></p>
-					  </div>
-					</div>
-
 					<!-- Salary -->
 					<div class="control-group clearfix">
 						<label class="control-label" 
-							for="salary">What hourly rate of pay do you expect to earn?</label>
+							for="salary">What hourly rate of pay do you expect to pay?</label>
 						<div class="controls">
 							<span class="alignleft">$</span>
 							<input type="type" 
@@ -334,12 +248,6 @@
 			<!-- Button -->
 			<div class="controls">
 
-				<button class="btn btn-info" 
-					ngf-select="upload($file)"
-					ng-model="resume"
-					name="file"
-					>Upload your resume
-				</button>
 
 				<hr />
 
@@ -350,7 +258,7 @@
 				</button>
 
 				<button class="btn btn-success"
-				ng-click="actionApplicant(user)">
+				ng-click="actionOffice(user)">
 					Complete registration
 				</button>
 			</div>

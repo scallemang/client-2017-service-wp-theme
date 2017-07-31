@@ -26,7 +26,7 @@ var PATHS = {
   plugins: [
     'node_modules/bowser/bowser.js',
     'node_modules/angular/angular.js',
-    'node_modules/ng-file-upload/dist/ng-file-upload-all.js',
+    'node_modules/ng-file-upload/dist/ng-file-upload.js',
     'node_modules/angular-bootstrap/ui-bootstrap.js',
   ],
   localjs: [

@@ -20,48 +20,13 @@ if(!class_exists('Teledent_Settings'))
         {
         	// register your plugin's settings
         	register_setting('teledent-group', 'api_gmap_key');
-            register_setting('teledent-group', 'api_lcbo_key');
-        	register_setting('teledent-group', 'api_beer_key');
-            register_setting('teledent-group', 'api_search_terms');
 
         	// add your settings section
-            add_settings_field(
-                'teledent-api_search_terms',
-                'Search Term',
-                array(&$this, 'settings_field_input_text'),
-                'teledent',
-                'teledent-section',
-                array(
-                    'field' => 'api_search_terms'
-                )
-            );
-
             add_settings_section(
                 'teledent-section',
                 'API Keys Settings',
                 array(&$this, 'settings_section_teledent'),
                 'teledent'
-            );
-
-            add_settings_field(
-                'teledent-api_lcbo_key',
-                'LCBO API Key',
-                array(&$this, 'settings_field_input_text'),
-                'teledent',
-                'teledent-section',
-                array(
-                    'field' => 'api_lcbo_key'
-                )
-            );
-            add_settings_field(
-                'teledent-api_beer_key',
-                'Beer Store API Key',
-                array(&$this, 'settings_field_input_text'),
-                'teledent',
-                'teledent-section',
-                array(
-                    'field' => 'api_beer_key'
-                )
             );
 
             add_settings_field(
@@ -81,7 +46,7 @@ if(!class_exists('Teledent_Settings'))
         public function settings_section_teledent()
         {
             // Think of this as help text for the section.
-            echo 'Set your search term for Ontario APIs';
+            echo 'More settings to be established as needed for project';
         }
 
         /**

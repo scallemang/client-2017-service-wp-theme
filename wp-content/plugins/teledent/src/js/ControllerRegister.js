@@ -7,6 +7,7 @@ angular.module('teledent', [])
   //Initial data states
   $scope.master = {};
   $scope.formState = 'register';
+  $scope.user = [];
   $scope.provList = [];
   $scope.genderList = [];
   $scope.languageList = [];
@@ -14,6 +15,10 @@ angular.module('teledent', [])
   $scope.contractTypesList = [];
   $scope.workTypesObjekt = [];
   $scope.softwareObjekt = [];
+
+
+  $scope.user.province = "Ontario";
+  $scope.user.gender = "Prefer not to say";
   
   //View Data
   var provObjekt = [
@@ -211,7 +216,6 @@ angular.module('teledent', [])
               'gender': $scope.master.gender.name,
               'primary_phone': $scope.master.primary_phone,
               'secondary_phone': $scope.master.secondary_phone,
-              'fax': $scope.master.postal_code,
               'street_name': $scope.master.street_name,
               'street_number': $scope.master.street_number,
               'unit_number': $scope.master.unit_number,

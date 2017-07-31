@@ -42,23 +42,13 @@ if(!class_exists('Teledent')) {
 				$plugin = plugin_basename(__FILE__);
 				add_filter("plugin_action_links_$plugin", array( $this, 'plugin_settings_link' ));
 
-				//Define Shortcode handlers
-				function teledent_form_login($atts) {}
-				
-				//Define Shortcode handler function, and set global attributes
-				function teledent_form_registration($atts) {
-					t_init();
-					print file_get_contents(plugins_url( '/templates/registration-form.php', __FILE__ ));
-
-				}
-
 			//Register Shortcodes that will trigger above function, add WP action
 				function teledent_sc_login() {
-					add_shortcode( 'form-login', 'teledent_form_login' );
+					add_shortcode( 'teledent-login', 'teledent_form_login' );
 				}
 
 				function teledent_sc_registration() {
-					add_shortcode( 'form-login', 'teledent_form_registration' );
+					add_shortcode( 'teledent-registration', 'teledent_form_registration' );
 				}
 
 				function teledent_sc_profile_update() {}
@@ -84,13 +74,23 @@ if(!class_exists('Teledent')) {
 					t_enqueue();
 
 					//Make ajaxurl global variable via wordpress hooks
-					print '<script>var ajaxurl = "' . admin_url('admin-ajax.php') . '"; window.ajaxurl = ajaxurl;</script>';
+					//print '<script>var ajaxurl = "' . admin_url('admin-ajax.php') . '"; window.ajaxurl = ajaxurl;</script>';
 
 				}
 
 			//Register AJAX callback functions
 				add_action( 'wp_ajax_prepDomAction', 'teledent_fn_registration' );
 				add_action( 'wp_ajax_nopriv_prepDomAction', 'teledent_fn_registration' );
+
+			//Define Shortcode handlers
+			function teledent_form_login($atts) {}
+			
+			//Define Shortcode handler function, and set global attributes
+				function teledent_form_registration($atts) {
+					t_init();
+					print file_get_contents(plugins_url( '/templates/registration.php', __FILE__ ));
+
+				}
 
 			//Prep Data Object to pass to DOM
 				function teledent_fn_registration() {
@@ -155,10 +155,10 @@ if(!class_exists('Teledent')) {
 
 			//Enqueue scripts
 				function t_enqueue() {
-					wp_enqueue_style( 'sf-styles', plugins_url( '/css/screen.css', __FILE__ ) );
-
 					wp_enqueue_style( 'teledent-bootstrap', plugins_url( '/dist/css/bootstrap.min.css', __FILE__ ), false ); 
 					wp_enqueue_style( 'teledent-bootstrap-theme', plugins_url( '/dist/css/bootstrap-theme.min.css', __FILE__ ), false ); 
+					wp_enqueue_style( 'teledent-styles', plugins_url( '/dist/css/screen.css', __FILE__ ) );
+
 
 					wp_enqueue_script( 'teledent-deps', plugins_url( '/dist/js/plugins.js', __FILE__ ), false );
 					wp_enqueue_script( 'teledent-main', plugins_url( '/dist/js/main.js', __FILE__ ), false );

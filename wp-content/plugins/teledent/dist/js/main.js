@@ -2,14 +2,26 @@ angular.module('teledent', [])
 .controller('RegistrationController', 
     ['$scope', '$http','$window', function($scope, $http, $window) {
 
-  //Set up initial data states
+  // $scope.ajaxurl = $window.ajaxurl;
+
+  //Initial data states
   $scope.master = {};
   $scope.formState = 'register';
+  $scope.user = [];
   $scope.provList = [];
-  $scope.ajaxurl = $window.ajaxurl;
+  $scope.genderList = [];
+  $scope.languageList = [];
+  $scope.lcoationList = [];
+  $scope.contractTypesList = [];
+  $scope.workTypesObjekt = [];
+  $scope.softwareObjekt = [];
 
-  //Field datasets
-  var spielObjekt = [
+
+  $scope.user.province = "Ontario";
+  $scope.user.gender = "Prefer not to say";
+  
+  //View Data
+  var provObjekt = [
     {name:'Alberta'},
     {name:'British Columbia'},
     {name:'Manitoba'},
@@ -26,14 +38,167 @@ angular.module('teledent', [])
     {name:'Yukon'}
   ];
 
-$scope.provList = spielObjekt;
+  var genderObjekt = [
+    {name:'Female'},
+    {name:'Male'},
+    {name:'Other'},
+    {name:'Prefer not to say'}
+  ];
+
+  var languageObjekt = [
+    {name:'English'},
+    {name:'French'},
+    {name:'Arabic'},
+    {name:'Bengali'},
+    {name:'Cantonese'},
+    {name:'Croatian'},
+    {name:'Czech'},
+    {name:'Farsi'},
+    {name:'Filipino'},
+    {name:'German'},
+    {name:'Greek'},
+    {name:'Gujarati'},
+    {name:'Hebrew'},
+    {name:'Hindi'},
+    {name:'Italian'},
+    {name:'Japanese'},
+    {name:'Korean'},
+    {name:'Kurdish'},
+    {name:'Mandarin'},
+    {name:'Persian'},
+    {name:'Polish'},
+    {name:'Punjabi'},
+    {name:'Portuguese'},
+    {name:'Russian'},
+    {name:'Serbian'},
+    {name:'Spanish'},
+    {name:'Tagalog'},
+    {name:'Tamil'},
+    {name:'Turkish'},
+    {name:'Ukranian'},
+    {name:'Urdu'}
+  ];
+
+  var locationObjekt = [
+    {name:'Acton'},
+    {name:'Ajax'},
+    {name:'Ancaster'},
+    {name:'Aurora'},
+    {name:'Barrie'},
+    {name:'Bolton'},
+    {name:'Bowmanville'},
+    {name:'Bradford'},
+    {name:'Brampton'},
+    {name:'Brantford'},
+    {name:'Burlington'},
+    {name:'Caledon'},
+    {name:'Cambridge'},
+    {name:'Don Mills'},
+    {name:'East Gwillimbury'},
+    {name:'East York'},
+    {name:'Etobicoke'},
+    {name:'Georgetown'},
+    {name:'Grimsby'},
+    {name:'Guelph'},
+    {name:'Halton Hills'},
+    {name:'Hamilton'},
+    {name:'Innisfil'},
+    {name:'King'},
+    {name:'Kitchener'},
+    {name:'London'},
+    {name:'Malton'},
+    {name:'Maple'},
+    {name:'Markham'},
+    {name:'Milton'},
+    {name:'Mississauga'},
+    {name:'New Tecumseth'},
+    {name:'Newmarket'},
+    {name:'Niagara Falls'},
+    {name:'North York'},
+    {name:'Oakville'},
+    {name:'Orangeville'},
+    {name:'Oshawa'},
+    {name:'Pickering'},
+    {name:'Port Credit'},
+    {name:'Richmond Hill'},
+    {name:'Saint Catharines'},
+    {name:'Scarborough'},
+    {name:'Shelburne'},
+    {name:'Stouffville'},
+    {name:'Thornhill'},
+    {name:'Toronto'},
+    {name:'Vaughan'},
+    {name:'Waterdown'},
+    {name:'Waterloo'},
+    {name:'Welland'},
+    {name:'Weston'},
+    {name:'Whitby'},
+    {name:'Woodbridge'},
+    {name:'York'},
+    {name:'Other'}
+  ];
+
+  var contractTypesObjekt = [
+    {name:'Full-time'},
+    {name:' Part-time'},
+    {name:' Permanent'},
+    {name:'Temporary'}
+  ];
+
+  var workTypesObjekt = [
+    {name:'Assistant (Level I)'},
+    {name:'Assistant (Level II)'},
+    {name:'Orthodontic Assistant (Level I)'},
+    {name:'Orthodontic Assistant (Level II)'},
+    {name:'Floater (Level I)'},
+    {name:'Floater (Level II)'},
+    {name:'Hygiene Coordinator'},
+    {name:'Office Manager'},
+    {name:'Receptionist'},
+    {name:'Registered Dental Hygienist'},
+    {name:'Orthodontic Hygienist'},
+    {name:'Restorative Dental Hygienist'},
+    {name:'Treatment Coordinator'}
+  ];
+
+  var softwareObjekt = [
+    {name:'ABELDent'},
+    {name:'Adstra'},
+    {name:'Autopia'},
+    {name:'Carestream'},
+    {name:'ClearDent'},
+    {name:'DentalWare'},
+    {name:'DentiMax'},
+    {name:'Dentrix'},
+    {name:'DOM'},
+    {name:'EagleSoft'},
+    {name:'Exan'},
+    {name:'iTero'},
+    {name:'LiveDDM'},
+    {name:'Logic Tech/Paradigm'},
+    {name:'MacPractice'},
+    {name:'Maxident'},
+    {name:'OPES'},
+    {name:'OrthoTrac'},
+    {name:'TDO'},
+    {name:'Tracker'},
+    {name:'Other'}
+  ];
+
+  $scope.provList = provObjekt;
+  $scope.genderList = genderObjekt;
+  $scope.languageList = languageObjekt;
+  $scope.locationList = locationObjekt;
+  $scope.contractTypesList = contractTypesObjekt;
+  $scope.workTypesList = workTypesObjekt;
+  $scope.softwareList = softwareObjekt;
 
   //Funcationality
   $scope.actionRegister = function(user) {
+
     $scope.master = angular.copy(user);
-    //ajax - create user account(s)
-	
-	   $scope.formState = 'applicant';
+	  //ajax - create user, 
+    $scope.formState = 'applicant';
 	
   };
 
@@ -45,38 +210,27 @@ $scope.provList = spielObjekt;
           'url': '/wp-admin/admin-ajax.php', 
           'params': {
               'action': 'prepDomAction',
+              'first_name': $scope.master.first_name,
+              'last_name': $scope.master.last_name,
               'email_address': $scope.master.email_address,
-
+              'gender': $scope.master.gender.name,
+              'primary_phone': $scope.master.primary_phone,
+              'secondary_phone': $scope.master.secondary_phone,
               'street_name': $scope.master.street_name,
-              'street_number': $scope.master.street_numbner,
+              'street_number': $scope.master.street_number,
               'unit_number': $scope.master.unit_number,
-
               'city': $scope.master.city,
               'province': $scope.master.province.name,
-              'postal_code': $scope.master.postal_code,
+              'postal_code': $scope.master.postal_code
           }
         }
       )
       .then(function successCallback(response) {
-      //   // this callback will be called asynchronously
-      //   // when the response is available
         console.log(response);
       }, function errorCallback(response) {
-      //   // called asynchronously if an error occurs
-      //   // or server returns response with an error status.
         console.log('error: ',response);
       });
 
-    //calling php
-    /// problem because i want to use wp_update_user() syntax
-    /// could use DB scripts in php/mysql, how to manage meta?
-
-
-
-    //ajax - update user account(s)
-    //send email to Teledent
-    //send welcome email to user asking to set password
-    //let user know to check their email
   };
 
   $scope.reset = function() {

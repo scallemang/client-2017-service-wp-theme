@@ -2,20 +2,28 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* BREAKPOINTS
-----------------------------------------------*/
-/*
- * Mixin for easy media queries
- * @include bp(tablet) { SCSS here };
-*/
-/*
- * Mixin for clearfix
- * @include clearfix;
-*/
-/*
- * Vertical Alignment via table middle
- * @include clearfix;
-*/
+/* line 6, sass/screen.scss */
+.teledent-app {
+  /* BREAKPOINTS
+  ----------------------------------------------*/
+  /*
+   * Mixin for easy media queries
+   * @include bp(tablet) { SCSS here };
+  */
+  /*
+   * Mixin for clearfix
+   * @include clearfix;
+  */
+  /*
+   * Vertical Alignment via table middle
+   * @include clearfix;
+  */
+  /* Standard syntax */
+  /* COLORS
+  ----------------------------------------------*/ }
+  /* line 1, sass/atoms/_forms.scss */
+  .teledent-app label {
+    text-align: left; }
 @-webkit-keyframes scaleGrowAnimation {
   0% {
     background-size: 30%; }
@@ -23,7 +31,6 @@
     background-size: 28%; }
   100% {
     background-size: 30%; } }
-/* Standard syntax */
 @keyframes scaleGrowAnimation {
   0% {
     background-size: 30%; }
@@ -31,5 +38,16 @@
     background-size: 28%; }
   100% {
     background-size: 30%; } }
-/* COLORS
-----------------------------------------------*/
+  /* line 1, sass/templates/_teledent_form.scss */
+  .teledent-app.form {
+    max-width: 560px; }
+    /* line 35, sass/atoms/_mixins.scss */
+    .teledent-app.form:before, .teledent-app.form:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+      width: 100%; }
+    /* line 42, sass/atoms/_mixins.scss */
+    .teledent-app.form:after {
+      clear: both; }

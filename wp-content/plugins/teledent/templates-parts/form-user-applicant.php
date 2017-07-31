@@ -14,6 +14,21 @@
 
 					<div class="control-group">
 						<label class="control-label" 
+							for="email_address_disabled">Email</label>
+						<div class="controls">
+							<input type="email" 
+								id="email_address_disabled"
+								name="email_address_disabled" 
+								placeholder="{{user.email_address}}" 
+								class="form-control input-lg"
+								tabindex="1"
+								disabled>
+							<p class="help-block">Email is locked until account creation complete.</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" 
 							for="first_name">First Name</label>
 						<div class="controls">
 							<input type="text" 
@@ -23,23 +38,24 @@
 								name="first_name" 
 								placeholder="What should we call you?" 
 								class="form-control input-lg"
-								tabindex="1">
+								tabindex="2">
 							<p class="help-block">First Name is a required field.</p>
 						</div>
 					</div>
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="email_address_disabled">Email</label>
+							for="last_name">Last Name</label>
 						<div class="controls">
 							<input type="text" 
-								id="email_address_disabled"
-								name="email_address_disabled" 
-								placeholder="{{user.email_address}}" 
+								id="last_name"
+								ng-model="user.last_name"
+								required 
+								name="last_name" 
+								placeholder="Your last name" 
 								class="form-control input-lg"
-								tabindex="3"
-								disabled>
-							<p class="help-block">Email is locked until account creation complete.</p>
+								tabindex="3">
+							<p class="help-block">Last Name is a required field.</p>
 						</div>
 					</div>
 
@@ -54,59 +70,8 @@
 								name="primary_phone" 
 								placeholder="eg: (905) 555-5555" 
 								class="form-control input-lg"
-								tabindex="5">
+								tabindex="4">
 							<p class="help-block">Phone Number is a required field.</p>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="fax">Fax</label>
-						<div class="controls">
-							<input type="text" 
-								id="fax"
-								ng-model="user.fax"
-								name="fax" 
-								placeholder="eg: (905) 555-5555" 
-								class="form-control input-lg"
-								tabindex="7">
-							<p class="help-block">Fax is not a required field.</p>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-6">
-
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="last_name">Last Name</label>
-						<div class="controls">
-							<input type="text" 
-								id="last_name"
-								ng-model="user.last_name"
-								required 
-								name="last_name" 
-								placeholder="Your last name" 
-								class="form-control input-lg"
-								tabindex="2">
-							<p class="help-block">Last Name is a required field.</p>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" 
-							for="gender">Gender</label>
-						<div class="controls">
-							<select 
-								id="gender"
-								ng-model="user.gender"
-								ng-options="gender.name for gender in genderList"
-								required 
-								name="gender"
-								placeholder="Select gender"
-								class="form-control input-lg"
-								tabindex="4" />
-							<p class="help-block">Gender is a required field.</p>
 						</div>
 					</div>
 
@@ -121,10 +86,28 @@
 								name="secondary_phone" 
 								placeholder="eg: (905) 555-5555" 
 								class="form-control input-lg"
-								tabindex="6">
+								tabindex="5">
 							<p class="help-block">Secondary Phone is a required field.</p>
 						</div>
 					</div>
+
+					<div class="control-group">
+						<label class="control-label" 
+							for="gender">Gender</label>
+						<div class="controls">
+							<select 
+								id="gender"
+								ng-model="user.gender"
+								ng-options="gender.name for gender in genderList"
+								required 
+								name="gender"
+								placeholder="Select gender"
+								class="form-control input-lg"
+								tabindex="7" />
+							<p class="help-block">This field is not mandatory. We do not screen applicants based on gender or any of the other prohibited grounds listed under the Ontario Human Rights Code.</p>
+						</div>
+					</div>
+
 
 				</div>   
 			</div>
@@ -144,59 +127,23 @@
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="street_name">Street Name</label>
+							for="street_name">Address</label>
 						<div class="controls">
 							<input type="text" 
 								id="street_name"
 								ng-model="user.street_name"
 								required 
 								name="street_name" 
-								placeholder="eg: Ontario St." 
+								placeholder="eg: 1-123 Example St." 
 								class="form-control input-lg"
 								tabindex="8">
-							<p class="help-block">Street Name is a required field.</p>
+							<p class="help-block"></p>
 						</div>
 					</div>
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="street_number">Street Number</label>
-						<div class="controls">
-							<input type="text" 
-								id="street_number"
-								ng-model="user.street_number"
-								required 
-								name="street_number" 
-								placeholder="eg: 123" 
-								class="form-control input-lg"
-								tabindex="10">
-							<p class="help-block">Street Number is a required field.</p>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="unit_number">Unit Number</label>
-						<div class="controls">
-							<input type="text" 
-								id="unit_number"
-								ng-model="user.unit_number"
-								required 
-								name="unit_number" 
-								placeholder="eg: 44" 
-								class="form-control input-lg"
-								tabindex="12">
-							<p class="help-block">Unit Number is a required field.</p>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-6">
-
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="city">City</label>
+							for="city">City *</label>
 						<div class="controls">
 							<input type="text" 
 								id="city"
@@ -205,31 +152,32 @@
 								name="city" 
 								placeholder="eg: Hamilton" 
 								class="form-control input-lg"
-								tabindex="11">
+								tabindex="9">
 							<p class="help-block">City is a required field.</p>
 						</div>
 					</div>
+
 					<div class="control-group">
 						<label class="control-label" 
-							for="province">Province</label>
+							for="province">Province *</label>
 						<div class="controls">
 							<select 
 								id="province"
 								ng-model="user.province"
 								ng-options="province.name for province in provList"
+
 								required 
 								name="province"
 								placeholder="Select province"
 								class="form-control input-lg"
-								tabindex="13"/>
-
+								tabindex="10"/>
 							<p class="help-block">Province is a required field.</p>
 						</div>
 					</div>
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="postal_code">Postal Code</label>
+							for="postal_code">Postal Code *</label>
 						<div class="controls">
 							<input type="type" 
 								id="postal_code"
@@ -238,7 +186,7 @@
 								name="postal_code" 
 								placeholder="eg: A1A 1A1" 
 								class="form-control input-lg"
-								tabindex="15">
+								tabindex="11">
 							<p class="help-block">Postal Code is a required field.</p>
 						</div>
 					</div>
@@ -252,72 +200,34 @@
 	<!-- BEGIN WORK DETAILS -->
 	<fieldset>
 		<div id="legend">
-			<legend class="">Work Information</legend>
+			<legend class="">Applicant Questionnaire</legend>
 		</div>
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-12">
 
+					<!-- TYPE OF QUALIFICATIONS -->
 					<div class="control-group">
 						<label class="control-label" 
-							for="locations">Where are you able to work?</label>
+							for="locations">What type of dental professional do you consider yourself to be?</label>
 						<div class="controls">
-							<span ng-repeat="location in locationList"
+							<span ng-repeat="qualification in workTypesList"
 								class="clearfix">
 								<label class="control-label" 
-								for="locations_{{location.name}}"
-								class="alignleft">{{location.name}}</label>
-								<input type="checkbox" 
-									id="locations_{{location.name}}"
-									ng-model="user.locations[location.name]"
-									required 
-									name="street_name" 
-									class="form-control input-lg alignleft"
-									tabindex="8">
-								</label>
-							</span>
-							<p class="help-block">Street Name is a required field.</p>
-						</div>
-					</div>
-
-					
-
-				</div>
-				<div class="col-md-6">
-
-					<!-- CURRENTLY WORKING -->
-					<div class="control-group">
-						<label class="control-label" 
-							for="locations">Are you currently working?</label>
-						<div class="controls">
-							<span class="clearfix">
-								<label class="control-label" 
-								for="locations_{{location.name}}"
-								class="alignleft">Yes</label>
+								for="qualification_{{qualification.name}}"
+								class="alignleft">{{qualification.name}}</label>
 								<input type="radio" 
-									id="currently_working"
-									ng-model="user.currently_working = true"
+									id="qualification_{{qualification.name}}"
+									ng-model="user.contract_type"
+									value="{{qualification.name}}"
 									required 
-									name="currently_working" 
+									name="contract_type" 
 									class="form-control input-lg alignleft"
 									tabindex="8">
 								</label>
 							</span>
-							<span class="clearfix">
-								<label class="control-label" 
-								for="locations_{{location.name}}"
-								class="alignleft">No</label>
-								<input type="radio" 
-									id="currently_working"
-									ng-model="user.currently_working = false"
-									required 
-									name="currently_working" 
-									class="form-control input-lg alignleft"
-									tabindex="8">
-								</label>
-							</span>
-							<p class="help-block">This is a required field.</p>
+							<p class="help-block">You can only choose one option. If you consider yourself part of more than one category then pick the category in which you feel your current skills are strongest.</p>
 						</div>
 					</div>
 
@@ -344,26 +254,64 @@
 						</div>
 					</div>
 
-					<!-- TYPE OF QUALIFICATIONS -->
+					
+
 					<div class="control-group">
 						<label class="control-label" 
-							for="locations">What type of working are you qualified for?</label>
+							for="locations">Where are you able to work?</label>
 						<div class="controls">
-							<span ng-repeat="qualification in workTypesList"
+							<span ng-repeat="location in locationList"
 								class="clearfix">
 								<label class="control-label" 
-								for="qualification_{{qualification.name}}"
-								class="alignleft">{{qualification.name}}</label>
+								for="locations_{{location.name}}"
+								class="alignleft">{{location.name}}</label>
 								<input type="checkbox" 
-									id="qualification_{{qualification.name}}"
-									ng-model="user.contract_type[qualification.name]"
+									id="locations_{{location.name}}"
+									ng-model="user.locations[location.name]"
 									required 
-									name="contract_type" 
+									name="street_name" 
 									class="form-control input-lg alignleft"
 									tabindex="8">
 								</label>
 							</span>
-							<p class="help-block">Qualification type is a required field.</p>
+						</div>
+					</div>
+
+
+					<!-- CURRENTLY WORKING -->
+					<div class="control-group">
+						<label class="control-label" 
+							for="locations">Are you currently working?</label>
+						<div class="controls">
+							<span class="clearfix">
+								<label class="control-label" 
+								for="locations_{{location.name}}"
+								class="alignleft">Yes</label>
+								<input type="radio" 
+									id="currently_working_true"
+									ng-model="user.currently_working"
+									value="true"
+									required 
+									name="currently_working_true" 
+									class="form-control input-lg alignleft"
+									tabindex="8">
+								</label>
+							</span>
+							<span class="clearfix">
+								<label class="control-label" 
+								for="locations_{{location.name}}"
+								class="alignleft">No</label>
+								<input type="radio" 
+									id="currently_working_false"
+									ng-model="user.currently_working"
+									value="false"
+									required 
+									name="currently_working_false" 
+									class="form-control input-lg alignleft"
+									tabindex="8">
+								</label>
+							</span>
+							<p class="help-block">This is a required field.</p>
 						</div>
 					</div>
 					

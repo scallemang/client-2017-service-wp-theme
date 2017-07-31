@@ -1,6 +1,8 @@
-<div ng-controller="RegistrationController"
-	ng-cloak
-	class="container">
+<div 
+  class="container teledent-app form"
+  id="registration"
+  ng-controller="RegistrationController"
+	ng-cloak>
   
  	<div class="row">
   		<div class="col-sm-12">
@@ -10,12 +12,12 @@
          		
             <!-- INITIAL State, core account details (email and usertype) -->
         		<ng-include 
-              src="'/wp-content/plugins/teledent/templates/form-registration.php'">
+              src="'/wp-content/plugins/teledent/templates-parts/form-registration.php'">
             </ng-include>
 
             <!-- APPLICANT State, further account details -->
 				    <ng-include 
-              src="'/wp-content/plugins/teledent/templates/form-user-applicant.php'">
+              src="'/wp-content/plugins/teledent/templates-parts/form-user-applicant.php'">
             </ng-include>
 
         	</form>

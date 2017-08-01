@@ -1,6 +1,6 @@
-angular.module('teledent', ['ngFileUpload'])
+angular.module('teledentRegister', [])
 .controller('RegistrationController', 
-    ['$scope', '$http','$window', 'Upload', function($scope, $http, $window, Upload) {
+    ['$scope', '$http','$window', function($scope, $http, $window) {
 
   // $scope.ajaxurl = $window.ajaxurl;
 

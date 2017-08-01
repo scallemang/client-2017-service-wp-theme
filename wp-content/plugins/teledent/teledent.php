@@ -111,8 +111,6 @@ if(!class_exists('Teledent')) {
 				  $filename = $meta['file']['name'];
 				  $destination = $meta['targetPath'] . $filename;
 				  move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
-
-				  var_dump($_GET);
 				}
 
 

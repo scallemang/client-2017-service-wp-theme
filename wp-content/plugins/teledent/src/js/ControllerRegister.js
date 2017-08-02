@@ -1,4 +1,4 @@
-angular.module('teledentRegister', [])
+angular.module('teledent', [])
 .controller('RegistrationController', 
     ['$scope', '$http','$window', function($scope, $http, $window) {
 

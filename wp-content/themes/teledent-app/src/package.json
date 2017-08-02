@@ -1,16 +1,31 @@
 {
-  "name": "libertyridge-wordpress",
-  "version": "1.0.0",
-  "description": "Liberty Ridge Homes custom theme (salient)",
+  "name": "teledent",
   "main": "gulpfile.js",
+  "version": "0.0.1",
+  "description": "Build system for Teledent Service Plug-in.",
+  "keywords": [
+    "yarn",
+    "webpack",
+    "gulp"
+  ],
+  "homepage": "https://teledent.ca",
+  "repository": "https://github.com/varco/teledent.git",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production"
   },
-  "author": "Brainrider Inc. <web@brainrider.com>",
+  "author": "The Variables Co. <info@thevariables.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-bootstrap": "^0.12.2",
+    "bootstrap": "^3.3.7",
+    "bowser": "^1.7.0",
+    "ng-file-upload": "^12.2.13",
+    "simplegrid": "^1.0.2"
+  },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -27,14 +42,12 @@
     "gulp-sourcemaps": "^2.1.1",
     "gulp-uglify": "^1.5.3",
     "jshint": "^2.9.1",
-    "panini": "^1.3.0",
     "run-sequence": "^1.1.5",
-    "style-sherpa": "^1.0.1",
     "tiny-lr": "^0.2.1",
-    "yargs": "^4.4.0"
+    "webpack": "^3.0.0"
   },
   "bugs": {
-    "email": "web@brainrider.com"
+    "email": "info@thevariables.com"
   },
   "private": true
 }

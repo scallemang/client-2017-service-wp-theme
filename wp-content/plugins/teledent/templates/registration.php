@@ -1,5 +1,5 @@
+
 <div 
-  ng-app="teledentRegister"
   class="container teledent-app form"
   id="registration"
   ng-controller="RegistrationController"

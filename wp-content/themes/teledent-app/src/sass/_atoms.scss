@@ -1,8 +1,2 @@
-@import "atoms/breakpoints";
-@import "atoms/colors";
-@import "atoms/helpers";
-@import "atoms/overrides";
-@import "atoms/type";
-
-//load after all settings
-@import "atoms/base";
+@import "atoms/forms";
+@import "atoms/mixins";

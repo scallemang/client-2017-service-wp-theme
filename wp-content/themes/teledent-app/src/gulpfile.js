@@ -1,82 +1,88 @@
 // Load plugins
 var $        = require('gulp-load-plugins')(),
-  argv     = require('yargs').argv,
   browser  = require('browser-sync'),
   gulp     = require('gulp'),
-  panini   = require('panini'),
   sequence = require('run-sequence'),
-  sherpa   = require('style-sherpa'),
-  //https://github.com/addyosmani/critical
-  //critical   = require('gulp-critical'),
   sourcemaps = require('gulp-sourcemaps'),
   plugins = require('gulp-load-plugins')({ camelize: true }),
   lr = require('tiny-lr'),
   server = lr(),
   sass = require('gulp-ruby-sass');
+  //critical   = require('gulp-critical'), https://github.com/addyosmani/critical
 
-
-// Check for --production flag
-var isProduction = !!(argv.production);
-
-// Port to use for the development server.
-var PROXY = "libertyridge.dev/";
+//Listen on this port
+var PORT = 35729;
 
 // File paths to various assets are defined here.
 var PATHS = {
   sass: [
-    'sass/**/*.scss',
-    'sass/*.scss'
+    'node_modules/simplegrid/simple-grid.scss',
+    'sass/**/*.scss'
   ],
-  vendorjs: [
+  css: [
+    'node_modules/bootstrap/dist/css/bootstrap.css',
+    'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+  ],
+  plugins: [
+    'node_modules/bowser/bowser.js',
+    'node_modules/angular/angular.js',
+    'node_modules/ng-file-upload/dist/ng-file-upload.js',
+    'node_modules/angular-bootstrap/ui-bootstrap.js',
   ],
   localjs: [
-    'js/scripts.js'
+    'js/ControllerRegister.js'
   ],
   images: [
-    'img/*'
+    'img/**/*'
   ]
 };
 
 //Sass Styles
-gulp.task('styles', function () {
+gulp.task('sass', function () {
   return sass(PATHS.sass, {
       lineNumbers: true
     })
     .on('error', sass.logError)
-    .pipe(gulp.dest('../assets/css'))
+    .pipe(gulp.dest('../dist/css'))
 });
 
 // Site Scripts
 gulp.task('local-scripts', function() {
   return gulp.src(PATHS.localjs)
-  .pipe(plugins.jshint('.jshintrc'))
+  // .pipe(plugins.jshint('.jshintrc'))
   .pipe(plugins.jshint.reporter('default'))
-  .pipe(plugins.concat('script.js'))
-  .pipe(gulp.dest('../assets/js'))
+  .pipe(plugins.concat('main.js'))
+  .pipe(gulp.dest('../dist/js'))
   .pipe(plugins.rename({ suffix: '.min' }))
   .pipe(plugins.uglify())
   .pipe(plugins.livereload(server))
   .pipe(plugins.notify({ message: 'Local scripts task complete' }));
 });
 
-gulp.task('vendor-scripts', function() {
-  return gulp.src(PATHS.vendorjs)
-  .pipe(plugins.jshint('.jshintrc'))
-  .pipe(plugins.jshint.reporter('default'))
+// Site Scripts
+gulp.task('plugin-scripts', function() {
+  return gulp.src(PATHS.plugins)
   .pipe(plugins.concat('plugins.js'))
-  .pipe(gulp.dest('../assets/js'))
+  .pipe(gulp.dest('../dist/js'))
   .pipe(plugins.rename({ suffix: '.min' }))
   .pipe(plugins.uglify())
   .pipe(plugins.livereload(server))
   .pipe(plugins.notify({ message: 'Local scripts task complete' }));
 });
+
+// Css
+  gulp.task('css', function() {
+    return gulp.src(PATHS.css)
+    .pipe(gulp.dest('../dist/css'))
+    .pipe(plugins.notify({ message: 'Foundation task complete' }));
+  });
 
 // Images
 gulp.task('images', function() {
   return gulp.src(PATHS.images)
   .pipe(plugins.cache(plugins.imagemin({ progressive: true })))
   .pipe(plugins.livereload(server))
-  .pipe(gulp.dest('../assets/img'))
+  .pipe(gulp.dest('../dist/images'))
   .pipe(plugins.notify({ message: 'Images task complete' }));
 });
 
@@ -84,11 +90,11 @@ gulp.task('images', function() {
 gulp.task('watch', function() {
 
   // Spin up a server and watch the files
-  server.listen(35730, function (err) {
+  server.listen(PORT, function (err) {
     if (err) {
       return console.log(err)
     };
-    gulp.watch(PATHS.sass, ['styles']);
+    gulp.watch(PATHS.sass, ['sass']);
     gulp.watch([PATHS.localjs], ['local-scripts']);
     gulp.watch(PATHS.images, ['images']);
   });
@@ -97,9 +103,10 @@ gulp.task('watch', function() {
 
 // Default task
 gulp.task('default', [
-    'styles',
-    // 'vendor-scripts',
+    'sass',
+    'plugin-scripts',
     'local-scripts',
+    'css',
     'images',
     'watch'
   ]

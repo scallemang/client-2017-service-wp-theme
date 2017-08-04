@@ -17,8 +17,8 @@ Template Name: Registration Template
 		<div class="row main-row">
 			<div id="page-<?php the_ID(); ?>" <?php post_class('col-12'); ?>>
 				<?php 
+					the_content();
 					include(locate_template('templates/registration.php'));
-					echo 'direct call';
 				?>
 			</div>
 		</div>

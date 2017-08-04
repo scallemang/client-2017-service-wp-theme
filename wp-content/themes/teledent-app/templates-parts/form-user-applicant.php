@@ -335,10 +335,9 @@
 			<div class="controls">
 
 				<button class="btn btn-info" 
-					ngf-select="upload($file)"
+					ngf-select="uploadFile($file)"
 					ng-model="resume"
-					name="file"
-					>Upload your resume
+					name="file">Upload your resume
 				</button>
 
 				<hr />

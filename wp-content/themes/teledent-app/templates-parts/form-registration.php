@@ -1,17 +1,13 @@
 					<fieldset
          			ng-show="formState == 'register'">
             		<div id="legend">
-              			<legend class="">Registrant Declaration</legend>
+              			<legend class="">Create your Teledent account</legend>
             		</div>
 
-					<p>Welcome to Teledent Dental Services. Please declare whether you are an Applicant (looking for a job) or a Dental Office (looking to hire someone).</p>
-					<p>Once you have made this selection you will begin the registration process. You must complete the entire process to create an account. Applicants, you will need to upload a .pdf, or .doc version of your resume to complete the process.</p>
-
 					<!-- USER TYPE -->
-					<div class="form-group" 
-						ng-init="user.type=FALSE">
+					<div class="form-group">
 					  <label for="radios" 
-					  	class="col-sm-12">How can Teledent help you?</label>
+					  	class="col-sm-12">What services are you looking for?</label>
 					  <div class=" col-sm-12 required">
 					    <div class="radio">
 					      <label class="radio-custom" 
@@ -20,19 +16,21 @@
 					        <input type="radio" 
 								ng-model="user.user_type" 
 								value="applicant"/>
-					        <span class="radio-label">I am an Applicant. I am looking for temporary or permanent work in the dental field.</span>
+					        <span class="radio-label">I am an Applicant. </span>
 					      </label>
-					    </div><div class="radio">
+					      <p class="help-block">I am looking for temporary or permanent work in the dental field.</p>
+					    </div>
+					    <div class="radio">
 					      <label class="radio-custom" 
 					      	data-initialize="radio" 
 					      	id="radios-office">
 					        <input type="radio" 
 								ng-model="user.user_type" 
 								value="office"/>
-					        <span class="radio-label">I work at a Dental Office. I am looking to hire someone to work in our office.</span>
+					        <span class="radio-label">I work at a Dental Office. </span>
 					      </label>
+					      <p class="help-block">I am looking to hire someone to work in our office.</p>
 					    </div>
-					    <p class="help-block"></p>
 					  </div>
 					</div>
 
@@ -47,25 +45,27 @@
 								required 
 								name="email_address" 
 								placeholder="example@email.com" 
-								class="form-control input-lg">
-							<p class="help-block">This is your primary contact method.</p>
+								class="form-control input-lg"
+								ng-change="emailCheck(user)">
+							<p class="help-block">Email is our primary contact method. <span class="alert-warning"
+								ng-if="!emailIsUnique">This email is already registered. | <a href="#">Reset password</a> </p></p>
+							
 						</div>
 					</div>
          
-			
 					<!-- SIGN UP BUTTON -->
 					<div class="control-group">
 						<!-- Button -->
 						<div class="controls">
 							<button class="btn btn-warning"
 							disabled
-							ng-if="!user.email_address || !user.user_type">
+							ng-if="!user.email_address || !user.user_type || !emailIsUnique">
 								Start Registration
 							</button>
 
 							<button class="btn btn-success"
 							ng-click="actionRegister(user)"
-							ng-if="user.email_address && user.user_type">
+							ng-if="user.email_address && user.user_type && emailIsUnique">
 								Start Registration
 							</button>
 						</div>

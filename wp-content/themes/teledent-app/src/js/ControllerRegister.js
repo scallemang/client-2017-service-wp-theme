@@ -16,6 +16,7 @@ angular.module('teledent', [])
   $scope.workTypesObjekt = [];
   $scope.softwareObjekt = [];
 
+  $scope.emailIsUnique = true;
 
   $scope.user.province = "Ontario";
   $scope.user.gender = "Prefer not to say";
@@ -193,14 +194,91 @@ angular.module('teledent', [])
   $scope.workTypesList = workTypesObjekt;
   $scope.softwareList = softwareObjekt;
 
-  //Funcationality
+  
+  //1. Check for Unique Email - AJAXed
+  $scope.emailCheck = function(user) {
+
+    $http({
+        'method': 'POST',
+        'url': '/wp-admin/admin-ajax.php', 
+        'params': {
+            'action': 'emailCheck',
+            'email_address': user.email_address
+        }
+      }
+    )
+    .then(function successCallback(response) {
+      console.log(response);
+      if(response.data !== "1" ) {
+        $scope.emailIsUnique = false;
+      } else {
+        $scope.emailIsUnique = true;
+      }
+    }, function errorCallback(response) {
+      console.log('error: ',response);
+    });
+  };
+
+
+ //2. Register Unique Email - AJAXed
   $scope.actionRegister = function(user) {
 
     $scope.master = angular.copy(user);
-	  // console.log('user_type',$scope.master.user.user_type);
+
+    $http({
+          'method': 'POST',
+          'url': '/wp-admin/admin-ajax.php', 
+          'params': {
+              'action': 'createAccount',
+              'user_type': $scope.master.user_type,
+              'email_address': $scope.master.email_address
+          }
+        }
+      )
+      .then(function successCallback(response) {
+        // console.log(response);
+      }, function errorCallback(response) {
+        console.log('error: ',response);
+      });
+
     $scope.formState = user.user_type;
-    // $scope.formState = 'office';
 	
+  };
+
+  $scope.actionApplicant = function(user) {
+    
+    $scope.master = angular.copy(user);
+
+    $http({
+          'method': 'POST',
+          'url': '/wp-admin/admin-ajax.php', 
+          'params': {
+              'action': 'createApplicant',
+              'user_type': $scope.master.user_type,
+              'first_name': $scope.master.first_name,
+              'last_name': $scope.master.last_name,
+              'email_address': $scope.master.email_address,
+              'gender': $scope.master.gender.name,
+              'primary_phone': $scope.master.primary_phone,
+              'secondary_phone': $scope.master.secondary_phone,
+              'address': $scope.master.address,
+              'city': $scope.master.city,
+              'postal_code': $scope.master.postal_code,
+              'province': $scope.master.province.name,
+              'work_types': $scope.master.work_types,
+              'contract_type': $scope.master.contract_type,
+              'commute': $scope.master.commute,
+              'locations': $scope.master.locations,
+              'salary': $scope.master.salary
+          }
+        }
+      )
+      .then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log('error: ',response);
+      });
+
   };
 
   $scope.actionApplicant = function(user) {
@@ -210,7 +288,7 @@ angular.module('teledent', [])
           'method': 'POST',
           'url': '/wp-admin/admin-ajax.php', 
           'params': {
-              'action': 'prepDomAction',
+              'action': 'createApplicant',
               'user_type': $scope.master.user_type,
               'first_name': $scope.master.first_name,
               'last_name': $scope.master.last_name,
@@ -239,6 +317,7 @@ angular.module('teledent', [])
   };
 
   $scope.actionOffice = function(user) {
+    
     $scope.master = angular.copy(user);
 
     $http({
@@ -269,13 +348,6 @@ angular.module('teledent', [])
 
     // upload later on form submit or something similar
     $scope.submitFile = function() {
-      if ($scope.form.file.$valid && $scope.file) {
-        $scope.upload($scope.file);
-      }
-    };
-
-    // upload later on form submit or something similar
-    $scope.emailCheck = function() {
       if ($scope.form.file.$valid && $scope.file) {
         $scope.upload($scope.file);
       }

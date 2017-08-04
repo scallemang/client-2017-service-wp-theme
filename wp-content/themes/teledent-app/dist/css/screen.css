@@ -22,27 +22,15 @@
   /* COLORS
   ----------------------------------------------*/ }
   /* line 2, sass/atoms/_forms.scss */
+  .teledent-app form {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem; }
+  /* line 7, sass/atoms/_forms.scss */
   .teledent-app fieldset {
     margin-top: 3rem; }
-  /* line 5, sass/atoms/_forms.scss */
+  /* line 10, sass/atoms/_forms.scss */
   .teledent-app label {
     text-align: left; }
-  /* line 9, sass/atoms/_forms.scss */
-  .teledent-app input[type=checkbox], .teledent-app input[type=radio] {
-    /* Double-sized Checkboxes */
-    -ms-transform: scale(2);
-    /* IE */
-    -moz-transform: scale(2);
-    /* FF */
-    -webkit-transform: scale(2);
-    /* Safari and Chrome */
-    -o-transform: scale(2);
-    /* Opera */
-    padding: 10px; }
-  /* line 18, sass/atoms/_forms.scss */
-  .teledent-app .radio-label, .teledent-app .checkbox-label {
-    /* Double-sized Checkboxes */
-    margin-left: 2rem; }
 @-webkit-keyframes scaleGrowAnimation {
   0% {
     background-size: 30%; }

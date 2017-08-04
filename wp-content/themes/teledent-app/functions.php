@@ -49,27 +49,63 @@ function salient_child_enqueue_styles() {
         $Post_Type_Order = new Post_Type_Order();
 
 
-        add_action( 'wp_ajax_prepDomAction', 'teledent_fn_createApplicant' );
-        add_action( 'wp_ajax_nopriv_prepDomAction', 'teledent_fn_createApplicant' );
 
         add_action( 'wp_ajax_createOffice', 'teledent_fn_createOffice' );
         add_action( 'wp_ajax_nopriv_createOffice', 'teledent_fn_createOffice' );
 
-        add_action( 'wp_ajax_uploadFile', 'teledent_fn_upload' );
-        add_action( 'wp_ajax_nopriv_uploadFile', 'teledent_fn_upload' );
 
+    //1. CHECK UNIQUE EMAIL, prevalidate - so nice for the user!
+    add_action( 'wp_ajax_emailCheck', 'teledent_fn_emailCheck' );
+    add_action( 'wp_ajax_nopriv_emailCheck', 'teledent_fn_emailCheck' );
 
-    function teledent_fn_startSignup() {
-        return username_exists( $email_address );
+    function teledent_fn_emailCheck() {
+        $isUnique = true;
+        extract($_GET);
+
+        if( null == username_exists( $email_address ) ) {
+            $isUnique = true;
+        } else {
+            $isUnique = false;
+        }
+
+        print_r($isUnique);
+
+        wp_die(); 
     }
 
-    function teledent_fn_upload() {
+    //2. CREATE ACCOUNT - username and password generated, no posts or emails generated
+    add_action( 'wp_ajax_createAccount', 'teledent_fn_createAccount' );
+    add_action( 'wp_ajax_nopriv_createAccount', 'teledent_fn_createAccount' );
+
+    function teledent_fn_createAccount() {
+
+        extract($_GET);
+        if( null == username_exists( $email_address ) ) {
+            // Generate the password and create the user
+            $password = wp_generate_password( 12, false );
+            $user_id = wp_create_user( $email_address, $password, $email_address );
+
+            // Set the role
+            $user = new WP_User( $user_id );
+            $user->set_role( $user_type );
+        }
+
+        wp_die(); // this is required
+    }
+
+    //3. UPLOAD RESUME
+    add_action( 'wp_ajax_uploadFile', 'teledent_fn_uploadFile' );
+    add_action( 'wp_ajax_nopriv_uploadFile', 'teledent_fn_uploadFile' );
+    function teledent_fn_uploadFile() {
       $meta = $_GET;
       $filename = $meta['file']['name'];
       $destination = $meta['targetPath'] . $filename;
       move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
     }
 
+    // CREATE APPLICANT PROFILE - insert collected data into applicant profile
+    add_action( 'wp_ajax_createApplicant', 'teledent_fn_createApplicant' );
+    add_action( 'wp_ajax_nopriv_createApplicant', 'teledent_fn_createApplicant' );
     function teledent_fn_createApplicant() {
 
         extract($_GET);
@@ -198,23 +234,6 @@ function salient_child_enqueue_styles() {
 
         wp_die(); // this is required
     }
-
-
-// //Enqueue scripts
-//     function t_enqueue() {
-//         wp_enqueue_style( 'teledent-bootstrap', get_template_directory_uri( '/dist/css/bootstrap.min.css', __FILE__ ), false ); 
-//         wp_enqueue_style( 'teledent-bootstrap-theme', get_template_directory_uri( '/dist/css/bootstrap-theme.min.css', __FILE__ ), false ); 
-//         wp_enqueue_style( 'teledent-styles', get_template_directory_uri( '/dist/css/screen.css', __FILE__ ) );
-
-
-//         wp_enqueue_script( 'teledent-deps', get_template_directory_uri( '/dist/js/plugins.js', __FILE__ ), false );
-//         wp_enqueue_script( 'teledent-main', get_template_directory_uri( '/dist/js/main.js', __FILE__ ), false );
-
-//         // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
-//         wp_localize_script( 'ajax-script', 'ajax_object',
-//             array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
-
-//     }
 
 //Take JSON breaking characters out of response.
     function string_sanitize($s) {

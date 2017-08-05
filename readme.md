@@ -12,6 +12,6 @@ Go to: https://github.com/varco/client-2017-service-wp-theme
 	127.0.0.1       teledent.dev
 
 ## Setup
-	`cd /wp-content/themes/teledent-app`
-	`sudo npm install -g && npm update`
-	`gulp`
+	cd /wp-content/themes/teledent-app
+	sudo npm install -g && npm update
+	gulp

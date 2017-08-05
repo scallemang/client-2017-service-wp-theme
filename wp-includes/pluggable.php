@@ -2529,5 +2529,5 @@ function wp_text_diff( $left_string, $right_string, $args = null ) {
 
 	return $r;
 }
-endif
-?>
+endif;
+

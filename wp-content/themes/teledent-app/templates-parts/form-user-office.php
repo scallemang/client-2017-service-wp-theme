@@ -258,7 +258,7 @@
 				</button>
 
 				<button class="btn btn-success"
-				ng-click="actionOffice(user)">
+				ng-click="createOffice(user)">
 					Complete registration
 				</button>
 			</div>

@@ -1,13 +1,13 @@
-angular.module('teledent', [])
+angular.module('teledent', ['ngFileUpload'])
 .controller('RegistrationController', 
-    ['$scope', '$http','$window', function($scope, $http, $window) {
+    ['$scope', '$http','$window', 'Upload', function($scope, $http, $window, Upload) {
 
   // $scope.ajaxurl = $window.ajaxurl;
 
   //Initial data states
   $scope.master = {};
-  $scope.formState = 'register';
-  $scope.user = [];
+  $scope.formState = 'applicant'; //register
+  $scope.user = {};
   $scope.provList = [];
   $scope.genderList = [];
   $scope.languageList = [];
@@ -21,6 +21,25 @@ angular.module('teledent', [])
   $scope.user.province = "Ontario";
   $scope.user.gender = "Prefer not to say";
   
+  //WP Uploader placement hack.
+  //if wfu_container.length > 2, remove the first ones.
+
+  $scope.wpUploadFileHandler = function () {
+    
+    var uploaders = document.querySelectorAll('.wfu_container');
+    var destination = document.getElementById('putUpload');
+    if(uploaders.length > 1) {
+      uploaders = document.querySelectorAll('.wfu_container')[0];
+    }
+
+    var uploader = p.cloneNode(uploaders);
+    uploaders.remove();
+    destination.innerHTML = uploader;
+
+
+  }
+ 
+
   //View Data
   var provObjekt = [
     {name:'Alberta'},
@@ -208,7 +227,6 @@ angular.module('teledent', [])
       }
     )
     .then(function successCallback(response) {
-      console.log(response);
       if(response.data !== "1" ) {
         $scope.emailIsUnique = false;
       } else {
@@ -235,41 +253,60 @@ angular.module('teledent', [])
           }
         }
       )
-      .then(function successCallback(response) {
-        // console.log(response);
-      }, function errorCallback(response) {
+      .then(function successCallback(response) {}, 
+        function errorCallback(response) {
         console.log('error: ',response);
       });
 
     $scope.formState = user.user_type;
-	
   };
 
-  $scope.actionApplicant = function(user) {
-    
-    $scope.master = angular.copy(user);
+  $scope.uploadComplete = function (content) {
+    $scope.response = JSON.parse(content); // Presumed content is a json string!
+    $scope.response.style = {
+      color: $scope.response.color,
+      "font-weight": "bold"
+    };
 
-    $http({
+    // Clear form (reason for using the 'ng-model' directive on the input elements)
+    $scope.fullname = '';
+    $scope.gender = '';
+    $scope.color = '';
+    // Look for way to clear the input[type=file] element
+  };
+
+$scope.uploadFileNO = function (file, user) {
+        Upload.upload({
+            url: '/wp-admin/admin-ajax.php?action=uploadFile',
+            data: {file: file, 'username': user.email_address, 'targetPath': '/wp-content/uploads/resume'}
+        }).then(function (resp) {
+            console.log(resp);
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.config.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+  // upload on file select or drop
+  $scope.uploadFile = function (file, user) {
+      
+      var filename = file.name;
+      var filesize = file.size;
+      var filetype = file.type;
+      var date = file.lastModified;
+
+      $http({
           'method': 'POST',
-          'url': '/wp-admin/admin-ajax.php', 
+          'url': '/wp/v2/media', 
           'params': {
-              'action': 'createApplicant',
-              'user_type': $scope.master.user_type,
-              'first_name': $scope.master.first_name,
-              'last_name': $scope.master.last_name,
-              'email_address': $scope.master.email_address,
-              'gender': $scope.master.gender.name,
-              'primary_phone': $scope.master.primary_phone,
-              'secondary_phone': $scope.master.secondary_phone,
-              'address': $scope.master.address,
-              'city': $scope.master.city,
-              'postal_code': $scope.master.postal_code,
-              'province': $scope.master.province.name,
-              'work_types': $scope.master.work_types,
-              'contract_type': $scope.master.contract_type,
-              'commute': $scope.master.commute,
-              'locations': $scope.master.locations,
-              'salary': $scope.master.salary
+              'date' : date,
+              'title' : filename,
+              'author' : 1,
+              'slug' : 'resume-filename',
+              'status' : 'private'
           }
         }
       )
@@ -278,10 +315,10 @@ angular.module('teledent', [])
       }, function errorCallback(response) {
         console.log('error: ',response);
       });
-
   };
 
-  $scope.actionApplicant = function(user) {
+  $scope.createApplicant = function(user) {
+
     $scope.master = angular.copy(user);
 
     $http({
@@ -346,41 +383,27 @@ angular.module('teledent', [])
 
   };
 
-    // upload later on form submit or something similar
-    $scope.submitFile = function() {
-      if ($scope.form.file.$valid && $scope.file) {
-        $scope.upload($scope.file);
-      }
-    };
-
-    // upload on file select or drop
-    $scope.upload = function (file) {
-        
-        Upload.upload({
-            url: '/wp-admin/admin-ajax.php', 
-            method: 'POST',
-            file: file,
-            data: {
-              targetPath : '/wp-content/plugins/resumes/',
-              file: file
-            },
-            'params': {
-              'action': 'fileUpload'
-            },
-        }).then(function (resp) {
-            console.log(resp);
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
-
   $scope.reset = function() {
     $scope.user = angular.copy($scope.master);
   };
 
   $scope.reset();
+}])
+.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
 }]);

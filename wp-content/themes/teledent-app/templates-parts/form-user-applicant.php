@@ -1,5 +1,5 @@
 <content 
-	ng-if="formState == 'applicant'">
+	ng-show="formState == 'applicant'">
 	<h2>Applicant Registration</h2>
 
 	<!-- BEGIN APPLICANT DETAILS -->
@@ -334,11 +334,17 @@
 			<!-- Button -->
 			<div class="controls">
 
-				<button class="btn btn-info" 
-					ngf-select="uploadFile($file)"
-					ng-model="resume"
-					name="file">Upload your resume
-				</button>
+				<div id="putUpload">put here</div>
+
+				<!-- <label for="resume">Upload your resume</label>
+				<input 
+					type="text"
+					class="btn btn-info" 
+					ngf-select="uploadFile($resume)"
+					ng-model="user.resume"
+					name="resume"
+					id="resume"/> -->
+
 
 				<hr />
 
@@ -349,7 +355,7 @@
 				</button>
 
 				<button class="btn btn-success"
-				ng-click="actionApplicant(user)">
+				ng-click="createApplicant(user)">
 					Complete registration
 				</button>
 			</div>

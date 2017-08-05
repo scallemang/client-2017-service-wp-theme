@@ -18,9 +18,13 @@ Template Name: Registration Template
 			<div id="page-<?php the_ID(); ?>" <?php post_class('col-12'); ?>>
 				<?php 
 					the_content();
-					include(locate_template('templates/registration.php'));
+
+					include(locate_template('templates/registration.php'));	
+					echo do_shortcode('[wordpress_file_upload uploadpath="uploads/resumes/%userid%" createpath="true" forcefilename="true"]');
+
 				?>
 			</div>
+			
 		</div>
 		<!-- END .row -->
 	</div>

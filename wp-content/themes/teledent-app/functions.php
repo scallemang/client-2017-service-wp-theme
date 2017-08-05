@@ -1,42 +1,31 @@
 <?php
 
-add_action( 'wp_enqueue_scripts', 'salient_child_enqueue_styles');
+    add_action( 'wp_enqueue_scripts', 'salient_child_enqueue_styles');
 
-function salient_child_enqueue_styles() {
+    function salient_child_enqueue_styles() {
 
-    wp_enqueue_style( 'parent-style',
-        get_template_directory_uri() . '/style.css',
-        array('font-awesome')
-    );
-
-    // wp_enqueue_style('child-style',
-    //     get_stylesheet_directory_uri() . '/dist/css/style.css'
-    // );
-
-    // wp_enqueue_script('child-scripts',
-    //     get_stylesheet_directory_uri() . '/dist/js/script.js',
-    //     array('jquery'),
-    //     NULL,
-    //     true
-    // );
-
-    if ( is_rtl() ) {
-        wp_enqueue_style(  'salient-rtl',
-            get_template_directory_uri(). '/rtl.css',
-            array(),
-            '1',
-            'screen'
+        wp_enqueue_style( 'parent-style',
+            get_template_directory_uri() . '/style.css',
+            array('font-awesome')
         );
+
+        if ( is_rtl() ) {
+            wp_enqueue_style(  'salient-rtl',
+                get_template_directory_uri(). '/rtl.css',
+                array(),
+                '1',
+                'screen'
+            );
+        }
+
+        wp_enqueue_style( 'teledent-bootstrap', get_stylesheet_directory_uri() . '/dist/css/bootstrap.css', false); 
+        wp_enqueue_style( 'teledent-bootstrap-theme', get_stylesheet_directory_uri() .  '/dist/css/bootstrap-theme.css', false ); 
+        wp_enqueue_style( 'teledent-styles', get_stylesheet_directory_uri() .  '/dist/css/screen.css' );
+
+        wp_enqueue_script( 'teledent-deps', get_stylesheet_directory_uri() . '/dist/js/plugins.js', false );
+        wp_enqueue_script( 'teledent-main', get_stylesheet_directory_uri() . '/dist/js/main.js', false );
+
     }
-
-    wp_enqueue_style( 'teledent-bootstrap', get_stylesheet_directory_uri() . '/dist/css/bootstrap.css', false); 
-    wp_enqueue_style( 'teledent-bootstrap-theme', get_stylesheet_directory_uri() .  '/dist/css/bootstrap-theme.css', false ); 
-    wp_enqueue_style( 'teledent-styles', get_stylesheet_directory_uri() .  '/dist/css/screen.css' );
-
-    wp_enqueue_script( 'teledent-deps', get_stylesheet_directory_uri() . '/dist/js/plugins.js', false );
-    wp_enqueue_script( 'teledent-main', get_stylesheet_directory_uri() . '/dist/js/main.js', false );
-
-}
 
 
     // Register custom post types
@@ -47,12 +36,6 @@ function salient_child_enqueue_styles() {
         $Post_Type_Applicant = new Post_Type_Applicant();
         $Post_Type_Office = new Post_Type_Office();
         $Post_Type_Order = new Post_Type_Order();
-
-
-
-        add_action( 'wp_ajax_createOffice', 'teledent_fn_createOffice' );
-        add_action( 'wp_ajax_nopriv_createOffice', 'teledent_fn_createOffice' );
-
 
     //1. CHECK UNIQUE EMAIL, prevalidate - so nice for the user!
     add_action( 'wp_ajax_emailCheck', 'teledent_fn_emailCheck' );
@@ -88,6 +71,12 @@ function salient_child_enqueue_styles() {
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( $user_type );
+
+            wp_clear_auth_cookie();
+            wp_set_current_user ( $user_id );
+            wp_set_auth_cookie  ( $user_id );
+            exit();
+
         }
 
         wp_die(); // this is required
@@ -99,8 +88,12 @@ function salient_child_enqueue_styles() {
     function teledent_fn_uploadFile() {
       $meta = $_GET;
       $filename = $meta['file']['name'];
-      $destination = $meta['targetPath'] . $filename;
-      move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+      $destination = $meta['targetPath'];
+      move_uploaded_file( $filename , $destination );
+
+      echo 'filename: ' . $filename;
+      echo 'destination: ' . $destination;
+     
     }
 
     // CREATE APPLICANT PROFILE - insert collected data into applicant profile
@@ -166,14 +159,22 @@ function salient_child_enqueue_styles() {
             );
 
           // Email the user
-          wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+
+            $email_subject = 'Your Teledent Account';
+            $email_body = 'Your Password: ' . $password;
+
+          wp_mail( $email_address, $email_subject, $email_body );
+
 
         }
 
         wp_die(); // this is required
     }
 
-        function teledent_fn_createOffice() {
+    // CREATE OFFICE PROFILE - insert collected data into applicant profile
+    add_action( 'wp_ajax_createOffice', 'teledent_fn_createOffice' );
+    add_action( 'wp_ajax_nopriv_createOffice', 'teledent_fn_createOffice' );
+    function teledent_fn_createOffice() {
 
         extract($_GET);
 
@@ -213,7 +214,7 @@ function salient_child_enqueue_styles() {
                 'post_type' => $user_type,
                 'meta_input' => $post_meta
             );
-    
+
             $applicant_post_id = wp_insert_post($new_post);
 
             // Set the nickname

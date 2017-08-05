@@ -376,7 +376,8 @@ class AAM_Frontend_Manager {
                         AAM_Core_Config::get("frontend.404redirect.{$type}")
                 );
             }
-        } elseif ($wp_query->is_single || $wp_query->is_page) {
+        } elseif ($wp_query->is_single || $wp_query->is_page 
+                                || $wp_query->is_posts_page || $wp_query->is_home) {
             $post = $this->getCurrentPost();
             
             if (is_a($post, 'WP_Post')) {

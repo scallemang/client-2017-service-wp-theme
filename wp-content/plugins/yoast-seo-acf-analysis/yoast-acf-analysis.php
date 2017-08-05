@@ -3,7 +3,7 @@
  * Plugin Name: Yoast SEO: ACF Analysis
  * Plugin URI: https://forsberg.ax
  * Description: Adds the content of all ACF fields to the Yoast SEO score analysis.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Marcus Forsberg & Team Yoast
  * Author URI: https://forsberg.ax
  * License: GPL v3
@@ -25,14 +25,14 @@ if ( ! defined( 'YOAST_ACF_ANALYSIS_FILE ' ) ) {
  */
 class Yoast_ACF_Analysis {
 
-	const VERSION = '1.2.0';
+	const VERSION = '1.2.1';
 
 	/**
 	 * Yoast_ACF_Analysis constructor.
 	 *
 	 * Add hooks and filters.
 	 */
-	function __construct() {
+	public function __construct() {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 
 		add_filter( 'wpseo_post_content_for_recalculation', array( $this, 'add_recalculation_data_to_post_content' ) );
@@ -127,7 +127,8 @@ class Yoast_ACF_Analysis {
 					'jquery',
 					$script_prefix . '-post-scraper',
 				),
-				self::VERSION
+				self::VERSION,
+				true
 			);
 		}
 
@@ -140,7 +141,8 @@ class Yoast_ACF_Analysis {
 					'jquery',
 					$script_prefix . '-term-scraper',
 				),
-				self::VERSION
+				self::VERSION,
+				true
 			);
 		}
 	}

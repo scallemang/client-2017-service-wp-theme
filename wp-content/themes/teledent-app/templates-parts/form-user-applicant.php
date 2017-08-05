@@ -334,17 +334,7 @@
 			<!-- Button -->
 			<div class="controls">
 
-				<div id="putUpload">put here</div>
-
-				<!-- <label for="resume">Upload your resume</label>
-				<input 
-					type="text"
-					class="btn btn-info" 
-					ngf-select="uploadFile($resume)"
-					ng-model="user.resume"
-					name="resume"
-					id="resume"/> -->
-
+				<div id="putUpload"></div>
 
 				<hr />
 

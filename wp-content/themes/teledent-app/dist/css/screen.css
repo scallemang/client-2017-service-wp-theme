@@ -45,6 +45,9 @@
     background-size: 28%; }
   100% {
     background-size: 30%; } }
+  /* line 1, sass/blocks/_uploader.scss */
+  .teledent-app #wordpress_file_upload_block_1 {
+    display: none; }
   /* line 1, sass/templates/_teledent_form.scss */
   .teledent-app.form {
     max-width: 560px; }

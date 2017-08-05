@@ -55,8 +55,8 @@ gulp.task('local-scripts', function() {
   .pipe(gulp.dest('../dist/js'))
   .pipe(plugins.rename({ suffix: '.min' }))
   .pipe(plugins.uglify())
-  .pipe(plugins.livereload(server))
-  .pipe(plugins.notify({ message: 'Local scripts task complete' }));
+  .pipe(plugins.livereload(server));
+  // .pipe(plugins.notify({ message: 'Local scripts task complete' }));
 });
 
 // Site Scripts
@@ -66,15 +66,15 @@ gulp.task('plugin-scripts', function() {
   .pipe(gulp.dest('../dist/js'))
   .pipe(plugins.rename({ suffix: '.min' }))
   .pipe(plugins.uglify())
-  .pipe(plugins.livereload(server))
-  .pipe(plugins.notify({ message: 'Local scripts task complete' }));
+  .pipe(plugins.livereload(server));
+  // .pipe(plugins.notify({ message: 'Local scripts task complete' }));
 });
 
 // Css
   gulp.task('css', function() {
     return gulp.src(PATHS.css)
-    .pipe(gulp.dest('../dist/css'))
-    .pipe(plugins.notify({ message: 'Foundation task complete' }));
+    .pipe(gulp.dest('../dist/css'));
+    // .pipe(plugins.notify({ message: 'Foundation task complete' }));
   });
 
 // Images
@@ -82,8 +82,8 @@ gulp.task('images', function() {
   return gulp.src(PATHS.images)
   .pipe(plugins.cache(plugins.imagemin({ progressive: true })))
   .pipe(plugins.livereload(server))
-  .pipe(gulp.dest('../dist/images'))
-  .pipe(plugins.notify({ message: 'Images task complete' }));
+  .pipe(gulp.dest('../dist/images'));
+  // .pipe(plugins.notify({ message: 'Images task complete' }));
 });
 
 // Watch

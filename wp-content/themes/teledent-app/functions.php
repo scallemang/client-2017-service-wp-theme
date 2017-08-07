@@ -66,6 +66,7 @@
         if( null == username_exists( $email_address ) ) {
             // Generate the password and create the user
             $password = wp_generate_password( 12, false );
+            $_SESSION['tmp-teledent-access'] = $password;
             $user_id = wp_create_user( $email_address, $password, $email_address );
 
             // Set the role
@@ -82,70 +83,94 @@
         wp_die(); // this is required
     }
 
-    // CREATE APPLICANT PROFILE - insert collected data into applicant profile
+    /* CREATE APPLICANT PROFILE 
+    * Insert collected data into applicant profile 
+    * Email user (welcome, with email) and Teledent (notice with resume)
+    */
+
     add_action( 'wp_ajax_createApplicant', 'teledent_fn_createApplicant' );
     add_action( 'wp_ajax_nopriv_createApplicant', 'teledent_fn_createApplicant' );
-    function teledent_fn_createApplicant() {
+        
+        function teledent_fn_createApplicant() {
 
-        extract($_GET);
+            extract($_GET);
 
-        // Set the role
-        $user = wp_get_current_user();
+            // Set the role
+            $user = wp_get_current_user();
 
-        //Make new Applicant Post Type
-        $post_meta = array(
-            'applicant_type' => $user_type,
-            'applicant_first_name' => $first_name,
-            'applicant_last_name' => $last_name,
-            'applicant_gender' => $gender,
-            'applicant_primary_phone' => $primary_phone,
-            'applicant_secondary_phone' => $secondary_phone,
-            'applicant_email' => $email_address,
-            'applicant_address' => $address,
-            'applicant_city' => $city,
-            'applicant_province' => $province,
-            'applicant_postal_code' => $postal_code,
-            'applicant_work_types' => json_decode($work_types),
-            'applicant_contract_type' => json_decode($contract_type),
-            'applicant_commute' => $commute,
-            'applicant_locations' => json_decode($locations),
-            'applicant_salary' => $salary
-        );
+            //Make new Applicant Post Type
+            $post_meta = array(
+                'applicant_type' => $user_type,
+                'applicant_first_name' => $first_name,
+                'applicant_last_name' => $last_name,
+                'applicant_gender' => $gender,
+                'applicant_primary_phone' => $primary_phone,
+                'applicant_secondary_phone' => $secondary_phone,
+                'applicant_email' => $email_address,
+                'applicant_address' => $address,
+                'applicant_city' => $city,
+                'applicant_province' => $province,
+                'applicant_postal_code' => $postal_code,
+                'applicant_work_types' => json_decode($work_types),
+                'applicant_contract_type' => json_decode($contract_type),
+                'applicant_commute' => $commute,
+                'applicant_locations' => json_decode($locations),
+                'applicant_salary' => $salary
+            );
 
-        $post_content = $last_name . ', ' . $first_name . ' - ' . $email_address; 
+            $post_content = $last_name . ', ' . $first_name . ' - ' . $email_address; 
 
-        $new_post = array(
-            'post_content' => $post_content,
-            'post_status' => 'draft',
-            'post_date' => date('Y-m-d H:i:s'),
-            'post_author' => $user->ID,
-            'post_title' => $post_content,
-            'post_type' => $user_type,
-            'meta_input' => $post_meta
-        );
+            $new_post = array(
+                'post_content' => $post_content,
+                'post_status' => 'draft',
+                'post_date' => date('Y-m-d H:i:s'),
+                'post_author' => $user->ID,
+                'post_title' => $post_content,
+                'post_type' => $user_type,
+                'meta_input' => $post_meta
+            );
 
-        $applicant_post_id = wp_insert_post($new_post);
+            $applicant_post_id = wp_insert_post($new_post);
 
-        // Set the nickname
-        wp_update_user(
-            array(
-                'ID'          =>    $user->ID,
-                'user_nicename'    =>    $applicant_post_id,
-                'first_name'    =>    $first_name,
-                'last_name'    =>    $last_name,
-                'description'    =>    $post_content
-            )
-        );
+            // Set the nickname
+            wp_update_user(
+                array(
+                    'ID'          =>    $user->ID,
+                    'user_nicename'    =>    $applicant_post_id,
+                    'first_name'    =>    $first_name,
+                    'last_name'    =>    $last_name,
+                    'description'    =>    $post_content
+                )
+            );
 
-        // Email the user
+            // Email the user
+            emailWelcomeApplicant($email_address, $user);
+            emailNotifyAdminNewApplicant($email_address, $user);
 
-        $email_subject = 'Your Teledent Account';
-        $email_body = 'Your Password: ' . $password;
+            echo '<script>document.location = "/dashboard"';
 
-        wp_mail( $email_address, $email_subject, $email_body );
+            wp_die(); // this is required
+        }
 
-        wp_die(); // this is required
-    }
+
+        function emailWelcomeApplicant($email_address) {
+
+            $email_subject = 'Your Teledent Account';
+            $email_body .= 'Your Password: ' .  $_SESSION['tmp-teledent-access'];
+            $headers = 'From: Teledent Dental Placement Services <no-replay@teledent.com>' . "\r\n";
+
+            wp_mail( $email_address, $email_subject, $email_body, $headers );
+        }
+
+        function emailNotifyAdminNewApplicant($user) {
+
+            $email_subject = 'New Teledent Applicant (resume attached)';
+            $attachments = array( WP_CONTENT_DIR . '/uploads/resumes/39/1920.jpg' );
+            $headers = 'From: Teledent Dental Placement Services <no-replay@teledent.com>' . "\r\n";
+
+            wp_mail( 'thevariables+teldent@gmail.com', $email_subject, $email_body, $headers, $attachments );
+
+        }
 
     // CREATE OFFICE PROFILE - insert collected data into applicant profile
     add_action( 'wp_ajax_createOffice', 'teledent_fn_createOffice' );
@@ -211,6 +236,7 @@
 
         wp_die(); // this is required
     }
+
 
 //Take JSON breaking characters out of response.
     function string_sanitize($s) {

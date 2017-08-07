@@ -337,10 +337,6 @@ angular.module('teledent', ['ngFileUpload'])
 
   };
 
-
-  
-
-
   $scope.init();
 
 }])

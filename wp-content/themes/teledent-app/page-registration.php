@@ -1,7 +1,7 @@
 <?php
 /**
  * @package WordPress
- * @subpackage Highend
+ * @subpackage teledent
  */
 /*
 Template Name: Registration Template

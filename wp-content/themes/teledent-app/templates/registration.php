@@ -36,6 +36,4 @@
     	</div> 
   	</div>
 
-	<pre>user = {{user | json}}</pre>
-	<pre>master = {{master | json}}</pre>
 </div>

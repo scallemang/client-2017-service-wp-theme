@@ -27,6 +27,11 @@
               src="'/wp-content/themes/teledent-app/templates-parts/form-user-office.php'">
             </ng-include>
 
+            <!-- SUCCESS State, confirm -->
+            <ng-include 
+              src="'/wp-content/themes/teledent-app/templates-parts/form-success.php'">
+            </ng-include>
+
         	</form>
     	</div> 
   	</div>

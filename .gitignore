@@ -1,3 +1,4 @@
+.gitignore
 node_modules
 .sass_cache
 assets

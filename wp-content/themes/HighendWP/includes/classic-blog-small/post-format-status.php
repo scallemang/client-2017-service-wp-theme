@@ -1,1 +1,0 @@
-<?php get_template_part('includes/classic-blog/post-format','status'); ?>

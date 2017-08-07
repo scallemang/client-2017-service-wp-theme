@@ -1,7 +1,7 @@
 <!doctype html>
 
 
-<html <?php language_attributes(); ?> class="no-js">
+<html <?php language_attributes(); ?> class="no-js" ng-app="teledent">
 <head>
 
 <!-- Meta Tags -->

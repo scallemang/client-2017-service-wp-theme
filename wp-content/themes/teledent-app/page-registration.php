@@ -13,7 +13,7 @@ Template Name: Teledent - Registration
 
 	<!-- BEGIN #main-content -->
 <div id="main-content" ng-app="teledent">
-	<div class="container">
+	<div class="container" >
 		<div class="row main-row">
 			<div id="page-<?php the_ID(); ?>" <?php post_class('col-12'); ?>>
 				<?php 
@@ -21,7 +21,6 @@ Template Name: Teledent - Registration
 					include(locate_template('templates/registration.php'));	
 				?>
 			</div>
-			
 		</div>
 		<!-- END .row -->
 	</div>

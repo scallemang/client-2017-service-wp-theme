@@ -1,7 +1,6 @@
-angular.module('teledent', ['ngFileUpload'])
+angular.module('teledent', [])
 .controller('RegistrationController', 
-    ['$scope', '$http','$window', 'Upload', function($scope, $http, $window, Upload) {
-
+    ['$scope', '$http', function($scope, $http) {
 
   $scope.init = function() {
     $scope.reset();
@@ -260,7 +259,9 @@ angular.module('teledent', ['ngFileUpload'])
           }
         }
       )
-      .then(function successCallback(response) {}, 
+      .then(function successCallback(response) {
+        $scope.userPassword = response.data
+      }, 
         function errorCallback(response) {
         console.log('error: ',response);
       });
@@ -300,7 +301,9 @@ angular.module('teledent', ['ngFileUpload'])
         }
       )
       .then(function successCallback(response) {
-        console.log(response);
+      
+        $scope.formState = 'success';
+
       }, function errorCallback(response) {
         console.log('error: ',response);
       });
@@ -339,22 +342,4 @@ angular.module('teledent', ['ngFileUpload'])
 
   $scope.init();
 
-}])
-.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
-        }
-    }
 }]);

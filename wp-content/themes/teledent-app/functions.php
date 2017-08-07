@@ -65,8 +65,8 @@
         extract($_GET);
         if( null == username_exists( $email_address ) ) {
             // Generate the password and create the user
+            
             $password = wp_generate_password( 12, false );
-            $_SESSION['tmp-teledent-access'] = $password;
             $user_id = wp_create_user( $email_address, $password, $email_address );
 
             // Set the role
@@ -76,8 +76,10 @@
             wp_clear_auth_cookie();
             wp_set_current_user ( $user_id );
             wp_set_auth_cookie  ( $user_id );
-            exit();
 
+            emailWelcomeApplicant($email_address, $password, $user_type);
+
+            exit();
         }
 
         wp_die(); // this is required
@@ -143,32 +145,41 @@
                 )
             );
 
-            // Email the user
-            emailWelcomeApplicant($email_address, $user);
+            // Email Teledent          
             emailNotifyAdminNewApplicant($email_address, $user);
-
-            echo '<script>document.location = "/dashboard"';
 
             wp_die(); // this is required
         }
 
 
-        function emailWelcomeApplicant($email_address) {
+        function emailWelcomeApplicant($email_address, $password, $user_type) {
 
             $email_subject = 'Your Teledent Account';
-            $email_body .= 'Your Password: ' .  $_SESSION['tmp-teledent-access'];
-            $headers = 'From: Teledent Dental Placement Services <no-replay@teledent.com>' . "\r\n";
+            $email_body = 'Welcome to Teledent Dental Services!' . "\r\n";
+            $email_body .= 'Your email and log-in account is: ' . $email_address . "\r\n";
+            $email_body .= 'Your password is: ' . $password . "\r\n";
+            $email_body .= 'Sign in to your account to find and apply for job postings: http:// '. "\r\n";
+            $headers = 'From: Teledent Dental Placement Services <no-reply@teledent.com>' . "\r\n";
 
-            wp_mail( $email_address, $email_subject, $email_body, $headers );
+            wp_mail( $email_address, 
+                $email_subject, 
+                $email_body, 
+                $headers
+            );
         }
 
         function emailNotifyAdminNewApplicant($user) {
 
             $email_subject = 'New Teledent Applicant (resume attached)';
             $attachments = array( WP_CONTENT_DIR . '/uploads/resumes/39/1920.jpg' );
-            $headers = 'From: Teledent Dental Placement Services <no-replay@teledent.com>' . "\r\n";
+            $headers = 'From: Teledent Dental Placement Services <no-reply@teledent.com>' . "\r\n";
 
-            wp_mail( 'thevariables+teldent@gmail.com', $email_subject, $email_body, $headers, $attachments );
+            wp_mail( 'thevariables+teledent@gmail.com', 
+                $email_subject, 
+                $email_body, 
+                $headers, 
+                $attachments
+            );
 
         }
 
@@ -217,7 +228,6 @@
             );
 
             $applicant_post_id = wp_insert_post($new_post);
-
             // Set the nickname
             wp_update_user(
                 array(
@@ -228,10 +238,6 @@
                     'description'    =>    $post_content
                 )
             );
-
-          // Email the user
-          wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
-
         }
 
         wp_die(); // this is required

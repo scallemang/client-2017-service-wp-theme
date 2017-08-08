@@ -18,29 +18,81 @@
  * @package WordPress
  */
 
-define('FS_METHOD','direct');
+// ** ENVIRONMENT declaration and configurations ** //
 
-// ** MySQL settings ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'teledent_wp' );
+        $server = strtolower( $_SERVER['SERVER_NAME'] );
+        $environment = 'production';
+        $path_array = explode("/", __FILE__);
 
-/** MySQL database username */
-define( 'DB_USER', 'root' );
+        $environments = array(
+                "teledent.dev" => "development",
+                "teledent.thevariables.com" => "staging",
+                "teledent.ca" => "production"
+        );
 
-/** MySQL database password */
-define( 'DB_PASSWORD', 'root' );
+        foreach ($environments as $key => $value) {
+                if($key == $server) $environment = $value;
+        }
 
-/** MySQL hostname */
-define( 'DB_HOST', '127.0.0.1' );
+        define('ENVIRONMENT', $environment);
 
-/** Database Charset to use in creating database tables. */
+        //define database connection settings
+        if(defined('ENVIRONMENT')) {
+                switch(ENVIRONMENT) {
+                case 'development':
+
+                        define('FS_METHOD','direct');
+
+                        define('DB_HOST', 'localhost');
+                        define('DB_NAME', 'teledent_wp');
+                        define('DB_USER', 'root');
+                        define('DB_PASSWORD', 'root');
+
+                        define('WP_DEBUG', true);
+                        define('WP_DEBUG_LOG', false);
+                        define('WP_DEBUG_DISPLAY', true);
+                        @ini_set('display_errors', true);
+
+                        break;
+
+                case 'staging':
+
+                        define('DB_NAME', 'teledent_thevariables_co');
+                        define('DB_USER', 'teledentthevaria');
+                        define('DB_PASSWORD', '9x3D2wYy');
+                        define('DB_HOST', 'mysql.teledent.thevariables.com');
+
+                        define('WP_DEBUG', true);
+                        define('WP_DEBUG_LOG', true);
+                        define('WP_DEBUG_DISPLAY', true);
+                        @ini_set('display_errors', true);
+                        break;
+
+
+  				case 'production':
+
+                        define('DB_HOST', '');
+                        define('DB_NAME', '');
+                        define('DB_USER', '');
+                        define('DB_PASSWORD', '');
+
+                        define('WP_DEBUG', false);
+                        define('WP_DEBUG_LOG', true);
+                        define('WP_DEBUG_DISPLAY', false);
+                        @ini_set('display_errors', false);
+                        break;
+
+        }
+}
+
+
+
 define( 'DB_CHARSET', 'utf8' );
-
-/** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
+@ini_set( 'upload_max_size' , '64M' );
+@ini_set( 'post_max_size', '64M');
+@ini_set( 'max_execution_time', '300' );
 
-
-define( 'WP_DEBUG', true );
 /**
  * Authentication Unique Keys and Salts.
  *

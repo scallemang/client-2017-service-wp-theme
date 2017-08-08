@@ -6,19 +6,8 @@ if(!class_exists('Post_Type_Order'))
      */
     class Post_Type_Order
     {
-        const POST_TYPE = "office";
+        const POST_TYPE = "order";
         private $_meta  = array(
-            'office_name',
-            'office_address',
-            'office_city',
-            'office_state',
-            'office_postal',
-            'office_country',
-            'office_phone',
-            'office_url',
-            'office_email',
-            'office_lat',
-            'office_lng',
         );
 
         /**

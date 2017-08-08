@@ -101,6 +101,37 @@
 	<!-- BEGIN ADDRESS -->
 	<fieldset>
 		<div id="legend">
+			<legend class="">Payment Info</legend>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="control-group">
+							<label class="control-label" 
+								for="creditcard">Credit Card Number</label>
+							<div class="controls">
+								<input type="number" 
+									id="creditcard"
+									ng-model="user.creditcard"
+									required 
+									name="address" 
+									placeholder="eg: 0000 0000 0000 0000" 
+									class="form-control input-lg"
+									tabindex="8">
+								<p class="help-block"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</fieldset>
+
+	<!-- BEGIN ADDRESS -->
+	<fieldset>
+		<div id="legend">
 			<legend class="">Address</legend>
 		</div>
 

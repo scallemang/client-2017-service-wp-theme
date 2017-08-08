@@ -271,7 +271,6 @@ angular.module('teledent', [])
 
   };
 
-
   $scope.createApplicant = function(user) {
 
     $scope.master = angular.copy(user);
@@ -325,6 +324,7 @@ angular.module('teledent', [])
               'email_address': $scope.master.email_address,
               'primary_phone': $scope.master.primary_phone,
               'secondary_phone': $scope.master.secondary_phone,
+              'creditcard': $scope.master.creditcard,
               'address': $scope.master.address,
               'work_types': $scope.master.work_types,
               'contract_type': $scope.master.contract_type,
@@ -333,7 +333,9 @@ angular.module('teledent', [])
         }
       )
       .then(function successCallback(response) {
-        console.log(response);
+
+        $scope.formState = 'success';
+        
       }, function errorCallback(response) {
         console.log('error: ',response);
       });

@@ -171,7 +171,7 @@
         function emailNotifyAdminNewApplicant($user) {
 
             $email_subject = 'New Teledent Applicant (resume attached)';
-            $attachments = array( WP_CONTENT_DIR . '/uploads/resumes/39/1920.jpg' );
+            $attachments = array( WP_CONTENT_DIR . '/uploads/resumes/1/sam.jpg' );
             $headers = 'From: Teledent Dental Placement Services <no-reply@teledent.com>' . "\r\n";
 
             wp_mail( 'thevariables+teledent@gmail.com', 
@@ -210,8 +210,8 @@
                 'applicant_email' => $email_address,
                 'applicant_address' => $address,
                 'applicant_city' => $city,
-                'applicant_work_types' => json_decode($work_types),
-                'applicant_contract_type' => json_decode($contract_type),
+                'applicant_work_types' => $work_types,
+                'applicant_contract_type' => $contract_type,
                 'applicant_salary' => $salary
             );
 

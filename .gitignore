@@ -2,3 +2,4 @@ node_modules
 .sass_cache
 /assets
 /wp
+wp-config.php

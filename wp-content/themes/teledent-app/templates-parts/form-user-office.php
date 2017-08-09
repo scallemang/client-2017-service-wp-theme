@@ -208,17 +208,16 @@
 					  <label for="locations" 
 					  	class="form-label col-sm-12">What type of dental professional do you need to hire?</label>
 					  <div class=" col-sm-12 required">
-					    <div class="checkbox"
+					    <div class="radio"
 					    	ng-repeat="qualification in workTypesList">
 					      <label class="radio-custom clearfix" 
-					      	data-initialize="checkbox" 
-					      	id="checkbox-locations">
-					        <input type="checkbox" 
-								ng-model="user.work_types[qualification.name]"
-								class="" />
-					        <span class="checkbox-label">{{qualification.name}}</span>
+					      	data-initialize="radio" 
+					      	id="radio-locations">
+					        <input type="radio" 
+								ng-model="user.work_types"
+								value="{{qualification.name}}" />
+					        <span class="radio-label">{{qualification.name}}</span>
 					      </label>
-					    </div>
 					    </div>
 						<p class="help-block">You can only choose one option.</p>
 					  </div>
@@ -238,7 +237,6 @@
 								ng-model="user.contract_type[contract_type.name]" />
 					        <span class="checkbox-label">{{contract_type.name}}</span>
 					      </label>
-					    </div>
 					    </div>
 					    <p class="help-block"></p>
 					  </div>
@@ -279,17 +277,16 @@
 			<!-- Button -->
 			<div class="controls">
 
-
 				<hr />
 
 				<button class="btn btn-warning"
-				disabled
-				ng-if="teledent-registration.$invalid">
+					disabled
+					ng-if="teledent-registration.$invalid">
 					Complete registration
 				</button>
 
 				<button class="btn btn-success"
-				ng-click="createOffice(user)">
+					ng-click="createOffice(user)">
 					Complete registration
 				</button>
 			</div>

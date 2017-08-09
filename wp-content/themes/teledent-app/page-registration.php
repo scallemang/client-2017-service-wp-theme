@@ -16,12 +16,8 @@ Template Name: Teledent - Registration
 	<div class="container" >
 		<div class="row main-row">
 			<div id="page-<?php the_ID(); ?>" <?php post_class('col-12'); ?>>
-				<div ng-if="formState == 'register'">
-					<?php 
-						the_content();
-					?>
-				</div>
 				<?php 
+					the_content();
 					include(locate_template('templates/registration.php'));	
 				?>
 			</div>

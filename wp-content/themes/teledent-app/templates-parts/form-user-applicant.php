@@ -158,7 +158,7 @@
 						</div>
 					</div>
 
-					<div class="control-group">
+<!-- 					<div class="control-group">
 						<label class="control-label" 
 							for="province">Province *</label>
 						<div class="controls">
@@ -174,7 +174,7 @@
 								tabindex="10"/>
 							<p class="help-block">Province is a required field.</p>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="control-group">
 						<label class="control-label" 
@@ -213,17 +213,16 @@
 					  <label for="locations" 
 					  	class="form-label col-sm-12">What type of dental professional do you consider yourself to be?</label>
 					  <div class=" col-sm-12 required">
-					    <div class="checkbox"
+					    <div class="radio"
 					    	ng-repeat="qualification in workTypesList">
 					      <label class="radio-custom clearfix" 
-					      	data-initialize="checkbox" 
-					      	id="checkbox-locations">
-					        <input type="checkbox" 
-								ng-model="user.work_types[qualification.name]"
-								class="" />
-					        <span class="checkbox-label">{{qualification.name}}</span>
+					      	data-initialize="radio" 
+					      	id="radio-locations">
+					        <input type="radio" 
+								ng-model="user.work_types"
+								value="{{qualification.name}}" />
+					        <span class="radio-label">{{qualification.name}}</span>
 					      </label>
-					    </div>
 					    </div>
 						<p class="help-block">You can only choose one option. If you consider yourself part of more than one category then pick the category in which you feel your current skills are strongest.</p>
 					  </div>
@@ -236,14 +235,13 @@
 					  <div class=" col-sm-12 required">
 					    <div class="checkbox"
 					    	ng-repeat="contract_type in contractTypesList">
-					      <label class="radio-custom clearfix" 
+					      <label class="checkbox-custom clearfix" 
 					      	data-initialize="checkbox" 
 					      	id="checkbox-contract_type">
 					        <input type="checkbox" 
 								ng-model="user.contract_type[contract_type.name]" />
 					        <span class="checkbox-label">{{contract_type.name}}</span>
 					      </label>
-					    </div>
 					    </div>
 					    <p class="help-block"></p>
 					  </div>
@@ -274,7 +272,6 @@
 					        <span class="radio-label">Transit</span>
 					      </label>
 					    </div>
-					    </div>
 						<p class="help-block"></p>
 					  </div>
 					</div>
@@ -293,7 +290,6 @@
 								ng-model="user.location[location.name]" />
 					        <span class="checkbox-label">{{location.name}}</span>
 					      </label>
-					    </div>
 					    </div>
 					    <p class="help-block"></p>
 					  </div>

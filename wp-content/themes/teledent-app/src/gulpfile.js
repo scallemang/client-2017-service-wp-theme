@@ -30,7 +30,7 @@ var PATHS = {
     'node_modules/angular-bootstrap/ui-bootstrap.js',
   ],
   localjs: [
-    'js/ControllerRegister.js'
+    'js/**/*'
   ],
   images: [
     'img/**/*'

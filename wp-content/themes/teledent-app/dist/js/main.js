@@ -20,37 +20,11 @@ angular.module('teledent', [])
     $scope.emailIsUnique = true;
 
     $scope.user = {};
-    $scope.provList = [];
-    $scope.genderList = [];
     $scope.languageList = [];
     $scope.lcoationList = [];
     $scope.contractTypesList = [];
     $scope.workTypesObjekt = [];
     $scope.softwareObjekt = [];
-
-    var provObjekt = [
-      {name:'Alberta'},
-      {name:'British Columbia'},
-      {name:'Manitoba'},
-      {name:'New Brunswick'},
-      {name:'British Columbia'},
-      {name:'Newfoundland and Labrador'},
-      {name:'Northwest Territories'},
-      {name:'Nova Scotia'},
-      {name:'Nunavut'},
-      {name:'Ontario'},
-      {name:'Prince Edward Island'},
-      {name:'Quebec'},
-      {name:'Saskatchewan'},
-      {name:'Yukon'}
-    ];
-
-    var genderObjekt = [
-      {name:'Female'},
-      {name:'Male'},
-      {name:'Other'},
-      {name:'Prefer not to say'}
-    ];
 
     var languageObjekt = [
       {name:'English'},
@@ -86,64 +60,64 @@ angular.module('teledent', [])
       {name:'Urdu'}
     ];
 
-    var locationObjekt = [
-      {name:'Acton'},
-      {name:'Ajax'},
-      {name:'Ancaster'},
-      {name:'Aurora'},
-      {name:'Barrie'},
-      {name:'Bolton'},
-      {name:'Bowmanville'},
-      {name:'Bradford'},
-      {name:'Brampton'},
-      {name:'Brantford'},
-      {name:'Burlington'},
-      {name:'Caledon'},
-      {name:'Cambridge'},
-      {name:'Don Mills'},
-      {name:'East Gwillimbury'},
-      {name:'East York'},
-      {name:'Etobicoke'},
-      {name:'Georgetown'},
-      {name:'Grimsby'},
-      {name:'Guelph'},
-      {name:'Halton Hills'},
-      {name:'Hamilton'},
-      {name:'Innisfil'},
-      {name:'King'},
-      {name:'Kitchener'},
-      {name:'London'},
-      {name:'Malton'},
-      {name:'Maple'},
-      {name:'Markham'},
-      {name:'Milton'},
-      {name:'Mississauga'},
-      {name:'New Tecumseth'},
-      {name:'Newmarket'},
-      {name:'Niagara Falls'},
-      {name:'North York'},
-      {name:'Oakville'},
-      {name:'Orangeville'},
-      {name:'Oshawa'},
-      {name:'Pickering'},
-      {name:'Port Credit'},
-      {name:'Richmond Hill'},
-      {name:'Saint Catharines'},
-      {name:'Scarborough'},
-      {name:'Shelburne'},
-      {name:'Stouffville'},
-      {name:'Thornhill'},
-      {name:'Toronto'},
-      {name:'Vaughan'},
-      {name:'Waterdown'},
-      {name:'Waterloo'},
-      {name:'Welland'},
-      {name:'Weston'},
-      {name:'Whitby'},
-      {name:'Woodbridge'},
-      {name:'York'},
-      {name:'Other'}
-    ];
+    // var locationObjekt = [
+    //   {name:'Acton'},
+    //   {name:'Ajax'},
+    //   {name:'Ancaster'},
+    //   {name:'Aurora'},
+    //   {name:'Barrie'},
+    //   {name:'Bolton'},
+    //   {name:'Bowmanville'},
+    //   {name:'Bradford'},
+    //   {name:'Brampton'},
+    //   {name:'Brantford'},
+    //   {name:'Burlington'},
+    //   {name:'Caledon'},
+    //   {name:'Cambridge'},
+    //   {name:'Don Mills'},
+    //   {name:'East Gwillimbury'},
+    //   {name:'East York'},
+    //   {name:'Etobicoke'},
+    //   {name:'Georgetown'},
+    //   {name:'Grimsby'},
+    //   {name:'Guelph'},
+    //   {name:'Halton Hills'},
+    //   {name:'Hamilton'},
+    //   {name:'Innisfil'},
+    //   {name:'King'},
+    //   {name:'Kitchener'},
+    //   {name:'London'},
+    //   {name:'Malton'},
+    //   {name:'Maple'},
+    //   {name:'Markham'},
+    //   {name:'Milton'},
+    //   {name:'Mississauga'},
+    //   {name:'New Tecumseth'},
+    //   {name:'Newmarket'},
+    //   {name:'Niagara Falls'},
+    //   {name:'North York'},
+    //   {name:'Oakville'},
+    //   {name:'Orangeville'},
+    //   {name:'Oshawa'},
+    //   {name:'Pickering'},
+    //   {name:'Port Credit'},
+    //   {name:'Richmond Hill'},
+    //   {name:'Saint Catharines'},
+    //   {name:'Scarborough'},
+    //   {name:'Shelburne'},
+    //   {name:'Stouffville'},
+    //   {name:'Thornhill'},
+    //   {name:'Toronto'},
+    //   {name:'Vaughan'},
+    //   {name:'Waterdown'},
+    //   {name:'Waterloo'},
+    //   {name:'Welland'},
+    //   {name:'Weston'},
+    //   {name:'Whitby'},
+    //   {name:'Woodbridge'},
+    //   {name:'York'},
+    //   {name:'Other'}
+    // ];
 
     var contractTypesObjekt = [
       {name:'Full-time'},
@@ -153,19 +127,9 @@ angular.module('teledent', [])
     ];
 
     var workTypesObjekt = [
-      {name:'Assistant (Level I)'},
-      {name:'Assistant (Level II)'},
-      {name:'Orthodontic Assistant (Level I)'},
-      {name:'Orthodontic Assistant (Level II)'},
-      {name:'Floater (Level I)'},
-      {name:'Floater (Level II)'},
-      {name:'Hygiene Coordinator'},
-      {name:'Office Manager'},
-      {name:'Receptionist'},
-      {name:'Registered Dental Hygienist'},
-      {name:'Orthodontic Hygienist'},
-      {name:'Restorative Dental Hygienist'},
-      {name:'Treatment Coordinator'}
+      {name:'Administer'},
+      {name:'Assistant'},
+      {name:'Hygienist'},
     ];
 
     var softwareObjekt = [
@@ -191,9 +155,6 @@ angular.module('teledent', [])
       {name:'Tracker'},
       {name:'Other'}
     ];
-
-    $scope.provList = provObjekt;
-    $scope.genderList = genderObjekt;
     $scope.languageList = languageObjekt;
     $scope.locationList = locationObjekt;
     $scope.contractTypesList = contractTypesObjekt;
@@ -284,17 +245,11 @@ angular.module('teledent', [])
               'first_name': $scope.master.first_name,
               'last_name': $scope.master.last_name,
               'email_address': $scope.master.email_address,
-              'gender': $scope.master.gender.name,
               'primary_phone': $scope.master.primary_phone,
-              'secondary_phone': $scope.master.secondary_phone,
-              'address': $scope.master.address,
-              'city': $scope.master.city,
               'postal_code': $scope.master.postal_code,
-              'province': $scope.master.province.name,
               'work_types': $scope.master.work_types,
               'contract_type': $scope.master.contract_type,
               'commute': $scope.master.commute,
-              'locations': $scope.master.locations,
               'salary': $scope.master.salary
           }
         }
@@ -324,7 +279,6 @@ angular.module('teledent', [])
               'email_address': $scope.master.email_address,
               'primary_phone': $scope.master.primary_phone,
               'secondary_phone': $scope.master.secondary_phone,
-              'creditcard': $scope.master.creditcard,
               'address': $scope.master.address,
               'work_types': $scope.master.work_types,
               'contract_type': $scope.master.contract_type,

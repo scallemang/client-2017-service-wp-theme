@@ -9,13 +9,8 @@ if(!class_exists('Post_Type_Applicant'))
         const POST_TYPE = "applicant";
         private $_meta  = array(
             'applicant_name',
-            'applicant_address',
-            'applicant_city',
-            'applicant_state',
             'applicant_postal',
-            'applicant_country',
             'applicant_phone',
-            'applicant_url',
             'applicant_email',
             'applicant_lat',
             'applicant_lng',

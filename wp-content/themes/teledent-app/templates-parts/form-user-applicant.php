@@ -78,106 +78,6 @@
 
 					<div class="control-group">
 						<label class="control-label" 
-							for="secondary_phone">Secondary Phone</label>
-						<div class="controls">
-							<input type="tel" 
-								id="secondary_phone"
-								ng-model="user.secondary_phone"
-								required 
-								name="secondary_phone" 
-								placeholder="eg: (905) 555-5555" 
-								class="form-control input-lg"
-								tabindex="5">
-							<p class="help-block">Secondary Phone is a required field.</p>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="gender">Gender</label>
-						<div class="controls">
-							<select 
-								id="gender"
-								ng-model="user.gender"
-								ng-options="gender.name for gender in genderList"
-								required 
-								name="gender"
-								placeholder="Select gender"
-								class="form-control input-lg"
-								tabindex="7" />
-							<p class="help-block">This field is not mandatory. We do not screen applicants based on gender or any of the other prohibited grounds listed under the Ontario Human Rights Code.</p>
-						</div>
-					</div>
-
-
-				</div>   
-			</div>
-		</div>	
-	</fieldset>
-	<!-- END APPLICANT DETAILS -->
-
-	<!-- BEGIN ADDRESS -->
-	<fieldset>
-		<div id="legend">
-			<legend class="">Address</legend>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="address">Address</label>
-						<div class="controls">
-							<input type="text" 
-								id="address"
-								ng-model="user.address"
-								required 
-								name="address" 
-								placeholder="eg: 1-123 Example St." 
-								class="form-control input-lg"
-								tabindex="8">
-							<p class="help-block"></p>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" 
-							for="city">City *</label>
-						<div class="controls">
-							<input type="text" 
-								id="city"
-								ng-model="user.city"
-								required 
-								name="city" 
-								placeholder="eg: Hamilton" 
-								class="form-control input-lg"
-								tabindex="9">
-							<p class="help-block">City is a required field.</p>
-						</div>
-					</div>
-
-<!-- 					<div class="control-group">
-						<label class="control-label" 
-							for="province">Province *</label>
-						<div class="controls">
-							<select 
-								id="province"
-								ng-model="user.province"
-								ng-options="province.name for province in provList"
-
-								required 
-								name="province"
-								placeholder="Select province"
-								class="form-control input-lg"
-								tabindex="10"/>
-							<p class="help-block">Province is a required field.</p>
-						</div>
-					</div> -->
-
-					<div class="control-group">
-						<label class="control-label" 
 							for="postal_code">Postal Code *</label>
 						<div class="controls">
 							<input type="type" 
@@ -196,7 +96,7 @@
 			</div>
 		</div>	
 	</fieldset>
-	<!-- END ADDRESS -->
+	<!-- END APPLICANT DETAILS -->
 
 	<!-- BEGIN WORK DETAILS -->
 	<fieldset>

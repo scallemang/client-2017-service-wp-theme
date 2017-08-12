@@ -1,24 +1,24 @@
 <?php
-if(!class_exists('Post_Type_Office'))
+if(!class_exists('Post_Type_Applicant'))
 {
     /**
      * A PostTypeTemplate class that provides 3 additional meta fields
      */
-    class Post_Type_Office
+    class Post_Type_Applicant
     {
-        const POST_TYPE = "office";
+        const POST_TYPE = "applicant";
         private $_meta  = array(
-            'office_name',
-            'office_address',
-            'office_city',
-            'office_state',
-            'office_postal',
-            'office_country',
-            'office_phone',
-            'office_url',
-            'office_email',
-            'office_lat',
-            'office_lng',
+            'applicant_name',
+            'applicant_address',
+            'applicant_city',
+            'applicant_state',
+            'applicant_postal',
+            'applicant_country',
+            'applicant_phone',
+            'applicant_url',
+            'applicant_email',
+            'applicant_lat',
+            'applicant_lng',
         );
 
         /**
@@ -117,8 +117,8 @@ if(!class_exists('Post_Type_Office'))
         public function add_inner_meta_boxes($post)
         {
             // Render the job order metabox
-            include(sprintf("%s/../templates/%s_metabox.php", dirname(__FILE__), self::POST_TYPE));
+            include(sprintf("%s_metabox.php", dirname(__FILE__), self::POST_TYPE));
         } // END public function add_inner_meta_boxes($post)
 
-    } // END class Post_Type_Office
-} // END if(!class_exists('Post_Type_Office'))
+    } // END class Post_Type_Applicant
+} // END if(!class_exists('Post_Type_Applicant'))

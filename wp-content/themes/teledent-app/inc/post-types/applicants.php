@@ -24,6 +24,7 @@ if(!class_exists('Post_Type_Applicant'))
             // register actions
             add_action('init', array(&$this, 'init'));
             add_action('admin_init', array(&$this, 'admin_init'));
+
         } // END public function __construct()
 
         /**
@@ -39,22 +40,161 @@ if(!class_exists('Post_Type_Applicant'))
         /**
          * Create the post type
          */
-        public function create_post_type()
-        {
+        public function create_post_type() {
+
+            $labels = array(
+                'name'               => _x( 'Applicants', 'post type general name' ),
+                'singular_name'      => _x( 'Applicant', 'post type singular name' ),
+                'add_new'            => _x( 'Add New', 'Applicant' ),
+                'add_new_item'       => __( 'Add New Applicant' ),
+                'edit_item'          => __( 'Edit Applicant' ),
+                'new_item'           => __( 'New Applicant' ),
+                'all_items'          => __( 'All Applicants' ),
+                'view_item'          => __( 'View Applicant' ),
+                'search_items'       => __( 'Search applicants' ),
+                'not_found'          => __( 'No applicants found' ),
+                'not_found_in_trash' => __( 'No applicants found in the Trash' ),
+                'parent_item_colon'  => '',
+                'menu_name'          => 'Applicants'
+              );
+
+
             register_post_type(self::POST_TYPE,
+
                 array(
-                    'labels' => array(
-                        'name' => __(sprintf('%ss', ucwords(str_replace("_", " ", self::POST_TYPE)))),
-                        'singular_name' => __(ucwords(str_replace("_", " ", self::POST_TYPE)))
-                    ),
+                    'labels' => $labels,
                     'public' => true,
                     'has_archive' => true,
-                    'description' => __("This is a sample post type meant only to illustrate a preferred structure of plugin development"),
+                    'description' => __("Displays applicants and their details"),
                     'supports' => array(
-                        'title', 'editor', 'excerpt',
+                        'title', 'editor'
                     ),
                 )
             );
+
+            $post_types = array('applicant', 'office', 'order');
+
+            function tax_placementTypes($post_types) {
+                $tax_labels = array(
+                    'name'              => _x( 'Order Types', 'taxonomy general name' ),
+                    'singular_name'     => _x( 'Order Type', 'taxonomy singular name' ),
+                    'search_items'      => __( 'Search Order Types' ),
+                    'all_items'         => __( 'All Order Types' ),
+                    'parent_item'       => __( 'Parent Order Type' ),
+                    'parent_item_colon' => __( 'Parent Order Type:' ),
+                    'edit_item'         => __( 'Edit Order Type' ),
+                    'update_item'       => __( 'Update Order Type' ),
+                    'add_new_item'      => __( 'Add New Order Type' ),
+                    'new_item_name'     => __( 'New Order Type' ),
+                    'menu_name'         => __( ' Order Types' ),
+                  );
+
+                $tax_args = array(
+                    'labels' => $tax_labels,
+                    'hierarchical' => true,
+                );
+
+                // create a new taxonomy
+                register_taxonomy(
+                    'placement_category',
+                    $post_types,
+                    $tax_args
+                );
+            }
+
+            function tax_postitionTypes($post_types) {
+                $tax_labels = array(
+                    'name'              => _x( 'Positions', 'taxonomy general name' ),
+                    'singular_name'     => _x( 'Position', 'taxonomy singular name' ),
+                    'search_items'      => __( 'Search Positions' ),
+                    'all_items'         => __( 'All Positions' ),
+                    'parent_item'       => __( 'Parent Position' ),
+                    'parent_item_colon' => __( 'Parent Position:' ),
+                    'edit_item'         => __( 'Edit Position' ),
+                    'update_item'       => __( 'Update Position' ),
+                    'add_new_item'      => __( 'Add New Position' ),
+                    'new_item_name'     => __( 'New Position' ),
+                    'menu_name'         => __( ' Positions' ),
+                  );
+
+                $tax_args = array(
+                    'labels' => $tax_labels,
+                    'hierarchical' => true,
+                );
+
+                // create a new taxonomy
+                register_taxonomy(
+                    'postitions_category',
+                    $post_types,
+                    $tax_args
+                );
+            }
+
+            function tax_softwareTypes($post_types) {
+                $tax_labels = array(
+                    'name'              => _x( 'Software Skills', 'taxonomy general name' ),
+                    'singular_name'     => _x( 'Software', 'taxonomy singular name' ),
+                    'search_items'      => __( 'Search Software' ),
+                    'all_items'         => __( 'All Software' ),
+                    'parent_item'       => __( 'Parent Software' ),
+                    'parent_item_colon' => __( 'Parent Software:' ),
+                    'edit_item'         => __( 'Edit Software' ),
+                    'update_item'       => __( 'Update Software' ),
+                    'add_new_item'      => __( 'Add New Software' ),
+                    'new_item_name'     => __( 'New Software' ),
+                    'menu_name'         => __( ' Software' ),
+                  );
+
+                $tax_args = array(
+                    'labels' => $tax_labels,
+                    'hierarchical' => true,
+                );
+
+                // create a new taxonomy
+                register_taxonomy(
+                    'software_category',
+                    $post_types,
+                    $tax_args
+                );
+            }
+
+            function tax_languages($post_types) {
+                $tax_labels = array(
+                    'name'              => _x( 'Languages', 'taxonomy general name' ),
+                    'singular_name'     => _x( 'Language', 'taxonomy singular name' ),
+                    'search_items'      => __( 'Search Language' ),
+                    'all_items'         => __( 'All Language' ),
+                    'parent_item'       => __( 'Parent Language' ),
+                    'parent_item_colon' => __( 'Parent Language:' ),
+                    'edit_item'         => __( 'Edit Language' ),
+                    'update_item'       => __( 'Update Language' ),
+                    'add_new_item'      => __( 'Add New Language' ),
+                    'new_item_name'     => __( 'New Language' ),
+                    'menu_name'         => __( ' Language' ),
+                  );
+
+                $tax_args = array(
+                    'labels' => $tax_labels,
+                    'hierarchical' => true,
+                );
+
+                // create a new taxonomy
+                register_taxonomy(
+                    'language_category',
+                    $post_types,
+                    $tax_args
+                );
+            }
+
+            tax_placementTypes($post_types);
+
+            tax_postitionTypes($post_types);
+
+            tax_softwareTypes($post_types);
+
+            tax_languages($post_types);
+
+
         }
 
         /**
@@ -82,6 +222,8 @@ if(!class_exists('Post_Type_Applicant'))
                 return;
             } // if($_POST['post_type'] == self::POST_TYPE && current_user_can('edit_post', $post_id))
         } // END public function save_post($post_id)
+
+
 
         /**
          * hook into WP's admin_init action hook
@@ -112,7 +254,7 @@ if(!class_exists('Post_Type_Applicant'))
         public function add_inner_meta_boxes($post)
         {
             // Render the job order metabox
-            include(sprintf("%s_metabox.php", dirname(__FILE__), self::POST_TYPE));
+            include(sprintf("applicant_metabox.php", dirname(__FILE__), self::POST_TYPE));
         } // END public function add_inner_meta_boxes($post)
 
     } // END class Post_Type_Applicant

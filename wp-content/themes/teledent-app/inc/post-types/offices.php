@@ -117,7 +117,7 @@ if(!class_exists('Post_Type_Office'))
         public function add_inner_meta_boxes($post)
         {
             // Render the job order metabox
-            include(sprintf("%s_metabox.php", dirname(__FILE__), self::POST_TYPE));
+            include(sprintf("office_metabox.php", dirname(__FILE__), self::POST_TYPE));
         } // END public function add_inner_meta_boxes($post)
 
     } // END class Post_Type_Office

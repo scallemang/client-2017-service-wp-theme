@@ -10,6 +10,7 @@
         return $result;
     }
 
+//Color Scheme
 function set_default_admin_color($user_id) {
     $args = array(
         'ID' => $user_id,
@@ -23,5 +24,7 @@ add_action('user_register', 'set_default_admin_color');
 
 if ( !current_user_can('manage_options') )
 remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
+
 
 ?>

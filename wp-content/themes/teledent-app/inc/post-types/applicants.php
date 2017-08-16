@@ -67,7 +67,7 @@ if(!class_exists('Post_Type_Applicant'))
                     'has_archive' => true,
                     'description' => __("Displays applicants and their details"),
                     'supports' => array(
-                        'title', 'editor'
+                        'title'
                     ),
                 )
             );
@@ -231,7 +231,7 @@ if(!class_exists('Post_Type_Applicant'))
         public function admin_init()
         {
             // Add metaboxes
-            add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
+            //add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
         } // END public function admin_init()
 
         /**

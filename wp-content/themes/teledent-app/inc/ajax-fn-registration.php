@@ -36,6 +36,39 @@
             $user = new WP_User( $user_id );
             $user->set_role( $user_type );
 
+            $post_name = str_replace("@", "_", $email_address);
+            $post_name = str_replace(".", "_", $post_name);
+
+            /* EXPERIMENTAL START */
+            //Create initial post
+            $new_post = array(
+                'post_content' => $email_address,
+                'post_status' => 'draft',
+                'post_date' => date('Y-m-d H:i:s'),
+                'post_author' => $user_id,
+                'post_title' => $email_address,
+                'post_name' => $post_name,
+                'post_type' => $user_type
+            );
+
+            $applicant_post_id = wp_insert_post($new_post);
+
+            // Set the nickname
+            wp_update_user(
+                array(
+                    'ID'          =>    $user_id,
+                    'user_nicename'    =>    $applicant_post_id
+                )
+            );
+
+            $redirectInfo = [
+                'type'=> $user_type,
+                'slug' => $email_address
+            ];
+
+            print $returnArr;
+            /* EXPERIMENTAL END */
+
             wp_clear_auth_cookie();
             wp_set_current_user ( $user_id );
             wp_set_auth_cookie  ( $user_id );

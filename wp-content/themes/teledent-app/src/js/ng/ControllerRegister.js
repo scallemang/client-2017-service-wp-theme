@@ -60,65 +60,6 @@ angular.module('teledent', [])
       {name:'Urdu'}
     ];
 
-    // var locationObjekt = [
-    //   {name:'Acton'},
-    //   {name:'Ajax'},
-    //   {name:'Ancaster'},
-    //   {name:'Aurora'},
-    //   {name:'Barrie'},
-    //   {name:'Bolton'},
-    //   {name:'Bowmanville'},
-    //   {name:'Bradford'},
-    //   {name:'Brampton'},
-    //   {name:'Brantford'},
-    //   {name:'Burlington'},
-    //   {name:'Caledon'},
-    //   {name:'Cambridge'},
-    //   {name:'Don Mills'},
-    //   {name:'East Gwillimbury'},
-    //   {name:'East York'},
-    //   {name:'Etobicoke'},
-    //   {name:'Georgetown'},
-    //   {name:'Grimsby'},
-    //   {name:'Guelph'},
-    //   {name:'Halton Hills'},
-    //   {name:'Hamilton'},
-    //   {name:'Innisfil'},
-    //   {name:'King'},
-    //   {name:'Kitchener'},
-    //   {name:'London'},
-    //   {name:'Malton'},
-    //   {name:'Maple'},
-    //   {name:'Markham'},
-    //   {name:'Milton'},
-    //   {name:'Mississauga'},
-    //   {name:'New Tecumseth'},
-    //   {name:'Newmarket'},
-    //   {name:'Niagara Falls'},
-    //   {name:'North York'},
-    //   {name:'Oakville'},
-    //   {name:'Orangeville'},
-    //   {name:'Oshawa'},
-    //   {name:'Pickering'},
-    //   {name:'Port Credit'},
-    //   {name:'Richmond Hill'},
-    //   {name:'Saint Catharines'},
-    //   {name:'Scarborough'},
-    //   {name:'Shelburne'},
-    //   {name:'Stouffville'},
-    //   {name:'Thornhill'},
-    //   {name:'Toronto'},
-    //   {name:'Vaughan'},
-    //   {name:'Waterdown'},
-    //   {name:'Waterloo'},
-    //   {name:'Welland'},
-    //   {name:'Weston'},
-    //   {name:'Whitby'},
-    //   {name:'Woodbridge'},
-    //   {name:'York'},
-    //   {name:'Other'}
-    // ];
-
     var contractTypesObjekt = [
       {name:'Full-time'},
       {name:' Part-time'},
@@ -155,8 +96,8 @@ angular.module('teledent', [])
       {name:'Tracker'},
       {name:'Other'}
     ];
+
     $scope.languageList = languageObjekt;
-    $scope.locationList = locationObjekt;
     $scope.contractTypesList = contractTypesObjekt;
     $scope.workTypesList = workTypesObjekt;
     $scope.softwareList = softwareObjekt;

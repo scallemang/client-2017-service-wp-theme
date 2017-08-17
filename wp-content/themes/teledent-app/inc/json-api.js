@@ -8,12 +8,35 @@
 	init();
 
 	function loadUsers() {
-		let users = new wp.api.collections.Users();
-		users.fetch({ data: { } }).done( () => {
-				clearPosts();
-				users.each( user => loadUser( user.attributes ) );
+		// let users = new wp.api.collections.Users();
+		// users.fetch({ data: { } }).done( () => {
+		// 		clearPosts();
+		// 		users.each( user => loadUser( user.attributes ) );
+		// });
+		
+		var me = new wp.api.models.User({
+			id: 50
 		});
-		console.log(users);
+		me.fetch().done( () => {
+				//console.log(me);
+		});
+
+		// var me2 = new wp.api.models.Me();
+		// me2.fetch().done( () => { /* continue when loaded */
+		//    var meUser2 = new wp.api.models.User( me.attributes );
+		//    console.log(meUser2);
+		// });
+
+
+		jQuery.ajax( {
+		    url: wpApiSettings.root + 'wp/v2/users/me',
+		    method: 'GET',
+		    beforeSend: function ( xhr ) {
+		        xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+		    }
+		} ).done( function ( response ) {
+		    console.log( response );
+		} );
 	}
 
 	function loadUser( user ) {

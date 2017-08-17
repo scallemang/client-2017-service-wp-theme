@@ -150,8 +150,7 @@ angular.module('teledent', [])
   $scope.actionRegister = function(user) {
 
     $scope.master = angular.copy(user);
-    $scope.formState = user.user_type;
-    // $scope.wpUploadFileHandler();
+    $scope.formState = 'success'; 
 
     $http({
           'method': 'POST',
@@ -164,7 +163,7 @@ angular.module('teledent', [])
         }
       )
       .then(function successCallback(response) {
-        window.location = '/applicant/' + response.data.slug;
+        window.location = '/' + response.data.type + '/' + response.data.slug;
       }, 
         function errorCallback(response) {
         console.log('error: ',response);

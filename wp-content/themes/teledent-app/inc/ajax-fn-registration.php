@@ -66,7 +66,7 @@
                 'slug' => $email_address
             ];
 
-            print $returnArr;
+            print_r(json_encode($redirectInfo));
             /* EXPERIMENTAL END */
 
             wp_clear_auth_cookie();

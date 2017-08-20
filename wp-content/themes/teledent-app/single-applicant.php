@@ -12,7 +12,7 @@
 					acf_form(array(
 						'post_id'	=> get_the_ID(),
 						'post_title'	=> false,
-						'submit_value'	=> 'Update the post!'
+						'submit_value'	=> 'Create my account'
 					));  
 				?>      
 			</div>

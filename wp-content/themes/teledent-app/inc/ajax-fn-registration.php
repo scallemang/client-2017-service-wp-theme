@@ -39,7 +39,6 @@
             $post_name = str_replace("@", "_", $email_address);
             $post_name = str_replace(".", "_", $post_name);
 
-            /* EXPERIMENTAL START */
             //Create initial post
             $new_post = array(
                 'post_content' => $email_address,
@@ -63,11 +62,10 @@
 
             $redirectInfo = [
                 'type'=> $user_type,
-                'slug' => $email_address
+                'slug' => $post_name
             ];
 
             print_r(json_encode($redirectInfo));
-            /* EXPERIMENTAL END */
 
             wp_clear_auth_cookie();
             wp_set_current_user ( $user_id );

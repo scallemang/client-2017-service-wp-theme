@@ -35,6 +35,7 @@
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( $user_type );
+            // $user->set_role( 'Subscriber' );
 
             $post_name = str_replace("@", "_", $email_address);
             $post_name = str_replace(".", "_", $post_name);
@@ -42,7 +43,7 @@
             //Create initial post
             $new_post = array(
                 'post_content' => $email_address,
-                'post_status' => 'draft',
+                'post_status' => 'private',
                 'post_date' => date('Y-m-d H:i:s'),
                 'post_author' => $user_id,
                 'post_title' => $email_address,
@@ -56,7 +57,10 @@
             wp_update_user(
                 array(
                     'ID'          =>    $user_id,
-                    'user_nicename'    =>    $applicant_post_id
+                    'user_nicename'    =>    $applicant_post_id,
+                    'user_email'    =>    $email_address,
+                    // 'role' => 'subscriber',
+                    'show_admin_bar_front' => 0
                 )
             );
 

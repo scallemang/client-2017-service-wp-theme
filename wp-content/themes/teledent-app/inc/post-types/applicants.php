@@ -67,26 +67,26 @@ if(!class_exists('Post_Type_Applicant'))
                     'has_archive' => true,
                     'description' => __("Displays applicants and their details"),
                     'supports' => array(
-                        'title', 'editor'
+                        'title'
                     ),
                 )
             );
 
             $post_types = array('applicant', 'office', 'order');
 
-            function tax_placementTypes($post_types) {
+            function tax_jobTypes($post_types) {
                 $tax_labels = array(
-                    'name'              => _x( 'Order Types', 'taxonomy general name' ),
-                    'singular_name'     => _x( 'Order Type', 'taxonomy singular name' ),
-                    'search_items'      => __( 'Search Order Types' ),
-                    'all_items'         => __( 'All Order Types' ),
-                    'parent_item'       => __( 'Parent Order Type' ),
-                    'parent_item_colon' => __( 'Parent Order Type:' ),
-                    'edit_item'         => __( 'Edit Order Type' ),
-                    'update_item'       => __( 'Update Order Type' ),
-                    'add_new_item'      => __( 'Add New Order Type' ),
-                    'new_item_name'     => __( 'New Order Type' ),
-                    'menu_name'         => __( ' Order Types' ),
+                    'name'              => _x( 'Job Types', 'taxonomy general name' ),
+                    'singular_name'     => _x( 'Job Type', 'taxonomy singular name' ),
+                    'search_items'      => __( 'Search Job Types' ),
+                    'all_items'         => __( 'All Job Types' ),
+                    'parent_item'       => __( 'Parent Job Type' ),
+                    'parent_item_colon' => __( 'Parent Job Type:' ),
+                    'edit_item'         => __( 'Edit Job Type' ),
+                    'update_item'       => __( 'Update Job Type' ),
+                    'add_new_item'      => __( 'Add New Job Type' ),
+                    'new_item_name'     => __( 'New Job Type' ),
+                    'menu_name'         => __( ' Job Types' ),
                   );
 
                 $tax_args = array(
@@ -96,7 +96,7 @@ if(!class_exists('Post_Type_Applicant'))
 
                 // create a new taxonomy
                 register_taxonomy(
-                    'placement_category',
+                    'job_category',
                     $post_types,
                     $tax_args
                 );
@@ -186,7 +186,7 @@ if(!class_exists('Post_Type_Applicant'))
                 );
             }
 
-            tax_placementTypes($post_types);
+            tax_jobTypes($post_types);
 
             tax_postitionTypes($post_types);
 
@@ -231,7 +231,7 @@ if(!class_exists('Post_Type_Applicant'))
         public function admin_init()
         {
             // Add metaboxes
-            add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
+            //add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
         } // END public function admin_init()
 
         /**

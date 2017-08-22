@@ -1,17 +1,8 @@
-<?php
-/**
- * @package WordPress
- * @subpackage teledent
- */
-/*
-Template Name: Teledent - Registration
-*/
-?>
+<?php acf_form_head(); ?>
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) : while (have_posts()) : the_post(); ?>
-
-	<!-- BEGIN #main-content -->
+<!-- BEGIN #main-content -->
 <div id="main-content" ng-app="teledent">
 	<div class="container" >
 		<div class="row main-row">
@@ -19,7 +10,7 @@ Template Name: Teledent - Registration
 				<?php 
 					the_content();
 					include(locate_template('templates/registration.php'));	
-				?>
+				?>      
 			</div>
 		</div>
 		<!-- END .row -->

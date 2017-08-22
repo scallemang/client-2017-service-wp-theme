@@ -35,17 +35,32 @@ if(!class_exists('Post_Type_Order'))
          */
         public function create_post_type()
         {
+            $labels = array(
+                'name'               => _x( 'Job Orders', 'post type general name' ),
+                'singular_name'      => _x( 'Job Order', 'post type singular name' ),
+                'add_new'            => _x( 'Add New', 'Order' ),
+                'add_new_item'       => __( 'Add New Order' ),
+                'edit_item'          => __( 'Edit Job Order' ),
+                'new_item'           => __( 'New Job Order' ),
+                'all_items'          => __( 'All Job Orders' ),
+                'view_item'          => __( 'View Job Order' ),
+                'search_items'       => __( 'Search job orders' ),
+                'not_found'          => __( 'No job orders found' ),
+                'not_found_in_trash' => __( 'No job orders found in the Trash' ),
+                'parent_item_colon'  => '',
+                'menu_name'          => 'Orders'
+              );
+
+
             register_post_type(self::POST_TYPE,
+
                 array(
-                    'labels' => array(
-                        'name' => __(sprintf('%ss', ucwords(str_replace("_", " ", self::POST_TYPE)))),
-                        'singular_name' => __(ucwords(str_replace("_", " ", self::POST_TYPE)))
-                    ),
+                    'labels' => $labels,
                     'public' => true,
                     'has_archive' => true,
-                    'description' => __("This is a sample post type meant only to illustrate a preferred structure of plugin development"),
+                    'description' => __("Displays Orders and their details"),
                     'supports' => array(
-                        'title', 'editor', 'excerpt',
+                        'title'
                     ),
                 )
             );

@@ -45,9 +45,29 @@
     background-size: 28%; }
   100% {
     background-size: 30%; } }
-  /* line 1, sass/blocks/_uploader.scss */
-  .teledent-app #wordpress_file_upload_block_1 {
-    display: none; }
+  /* line 1, sass/atoms/_elems.scss */
+  .teledent-app h1, .teledent-app .h1, .teledent-app h2, .teledent-app .h2, .teledent-app h3, .teledent-app .h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important; }
+  /* line 35, sass/atoms/_mixins.scss */
+  .teledent-app #profile-subnav ul:before, .teledent-app #profile-subnav ul:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+    width: 100%; }
+  /* line 42, sass/atoms/_mixins.scss */
+  .teledent-app #profile-subnav ul:after {
+    clear: both; }
+  /* line 50, sass/atoms/_mixins.scss */
+  .teledent-app #profile-subnav ul li {
+    list-style: none;
+    float: left;
+    clear: none;
+    margin: 0 1rem 0 0; }
+    /* line 55, sass/atoms/_mixins.scss */
+    .teledent-app #profile-subnav ul li:last-child {
+      margin: 0; }
   /* line 1, sass/templates/_teledent_form.scss */
   .teledent-app.form {
     max-width: 560px; }

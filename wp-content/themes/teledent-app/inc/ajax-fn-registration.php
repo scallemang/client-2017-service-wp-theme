@@ -34,7 +34,7 @@
 
             // Set the role
             $user = new WP_User( $user_id );
-            $user->set_role( $user_type );
+            // $user->set_role( $user_type );
             $user->set_role( 'subscriber' );
 
             $post_name = str_replace("@", "_", $email_address);
@@ -59,7 +59,6 @@
                     'ID'          =>    $user_id,
                     'user_nicename'    =>    $applicant_post_id,
                     'user_email'    =>    $email_address,
-                    // 'role' => 'subscriber',
                     'show_admin_bar_front' => 0
                 )
             );
@@ -92,6 +91,23 @@
     add_action( 'wp_ajax_nopriv_createApplicant', 'teledent_fn_createApplicant' );
         
         function teledent_fn_createApplicant() {
+
+            // extract($_GET);
+
+            // Set the role
+            $user = wp_get_current_user();
+
+        }
+
+    /* CREATE APPLICANT PROFILE 
+    * Insert collected data into applicant profile 
+    * Email user (welcome, with email) and Teledent (notice with resume)
+    */
+
+    add_action( 'wp_ajax_updateAccount', 'teledent_fn_updateAccount' );
+    add_action( 'wp_ajax_updateAccount', 'teledent_fn_updateAccount' );
+        
+        function teledent_fn_updateAccount() {
 
             extract($_GET);
 

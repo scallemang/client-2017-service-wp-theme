@@ -9,22 +9,7 @@
 		if ( have_posts() ) : while (have_posts()) : the_post(); 
 
 	
-	//FORM SAVE
-
-
-	function my_acf_save_post( $post_id ) {
-	    
-	    // get new value
-	    $value = get_field('my_field');
-	    
-	    
-	    // do something
-	    echo '<script>alert("After submit")</script>';
-
-	}
-
-	add_action('acf/save_post', 'my_acf_save_post', 20);
-
+	
 
 	?>
 		
@@ -37,8 +22,8 @@
 							acf_form(array(
 								'post_id'	=> get_the_ID(),
 								'post_title'	=> false,
-								'submit_value'	=> __("Create my account", 'acf'),
-									'html_submit_button'	=> '<input type="submit" class="acf-button button button-primary button-large" value="%s" />',
+								'submit_value'	=> __("Create my Office", 'acf'),
+								'html_submit_button'	=> '<input type="submit" class="acf-button button button-primary button-large" value="%s" />',
 								'return' => '/dashboard'
 							));  
 						?>      

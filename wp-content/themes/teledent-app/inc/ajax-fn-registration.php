@@ -35,7 +35,7 @@
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( $user_type );
-            // $user->set_role( 'Subscriber' );
+            $user->set_role( 'subscriber' );
 
             $post_name = str_replace("@", "_", $email_address);
             $post_name = str_replace(".", "_", $post_name);

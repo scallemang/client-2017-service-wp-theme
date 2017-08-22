@@ -20,5 +20,10 @@
 	
 	add_action( 'add_meta_boxes', 'remove_yoast_metabox',11 );
 
+    //Add custom body_class(es)
+    add_filter( 'body_class', function( $classes ) {
+        return array_merge( $classes, array( 'teledent-app' ) );
+    } );
+
 
  ?>

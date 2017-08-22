@@ -44,6 +44,22 @@ $breakpoint-xxlarge: 1440px; //retina laptop
     }
 }
 
+@mixin inlineBullets {
+    ul {
+        @include clearfix;
+        li {
+            list-style: none;
+            float: left;
+            clear: none;
+            margin: 0 1rem 0 0;
+            &:last-child {
+                margin:0
+            };
+        }
+    }
+}
+
+
 /*
  * Vertical Alignment via table middle
  * @include clearfix;

@@ -13,94 +13,11 @@ angular.module('teledent', [])
   };
 
   $scope.dataSetup = function() {
-
     //Initial data states
     $scope.master = {};
     $scope.formState = 'register'; //applicant
     $scope.emailIsUnique = true;
-
-    $scope.user = {};
-    $scope.languageList = [];
-    $scope.lcoationList = [];
-    $scope.contractTypesList = [];
-    $scope.workTypesObjekt = [];
-    $scope.softwareObjekt = [];
-
-    var languageObjekt = [
-      {name:'English'},
-      {name:'French'},
-      {name:'Arabic'},
-      {name:'Bengali'},
-      {name:'Cantonese'},
-      {name:'Croatian'},
-      {name:'Czech'},
-      {name:'Farsi'},
-      {name:'Filipino'},
-      {name:'German'},
-      {name:'Greek'},
-      {name:'Gujarati'},
-      {name:'Hebrew'},
-      {name:'Hindi'},
-      {name:'Italian'},
-      {name:'Japanese'},
-      {name:'Korean'},
-      {name:'Kurdish'},
-      {name:'Mandarin'},
-      {name:'Persian'},
-      {name:'Polish'},
-      {name:'Punjabi'},
-      {name:'Portuguese'},
-      {name:'Russian'},
-      {name:'Serbian'},
-      {name:'Spanish'},
-      {name:'Tagalog'},
-      {name:'Tamil'},
-      {name:'Turkish'},
-      {name:'Ukranian'},
-      {name:'Urdu'}
-    ];
-
-    var contractTypesObjekt = [
-      {name:'Full-time'},
-      {name:' Part-time'},
-      {name:' Permanent'},
-      {name:'Temporary'}
-    ];
-
-    var workTypesObjekt = [
-      {name:'Administer'},
-      {name:'Assistant'},
-      {name:'Hygienist'},
-    ];
-
-    var softwareObjekt = [
-      {name:'ABELDent'},
-      {name:'Adstra'},
-      {name:'Autopia'},
-      {name:'Carestream'},
-      {name:'ClearDent'},
-      {name:'DentalWare'},
-      {name:'DentiMax'},
-      {name:'Dentrix'},
-      {name:'DOM'},
-      {name:'EagleSoft'},
-      {name:'Exan'},
-      {name:'iTero'},
-      {name:'LiveDDM'},
-      {name:'Logic Tech/Paradigm'},
-      {name:'MacPractice'},
-      {name:'Maxident'},
-      {name:'OPES'},
-      {name:'OrthoTrac'},
-      {name:'TDO'},
-      {name:'Tracker'},
-      {name:'Other'}
-    ];
-
-    $scope.languageList = languageObjekt;
-    $scope.contractTypesList = contractTypesObjekt;
-    $scope.workTypesList = workTypesObjekt;
-    $scope.softwareList = softwareObjekt;
+    $scope.user = {};   
   }
 
   //HACK AROUND - used to hide, reposition, and remove extra 
@@ -150,7 +67,7 @@ angular.module('teledent', [])
   $scope.actionRegister = function(user) {
 
     $scope.master = angular.copy(user);
-    $scope.formState = 'success'; 
+    // $scope.formState = 'success'; 
 
     $http({
           'method': 'POST',
@@ -163,7 +80,7 @@ angular.module('teledent', [])
         }
       )
       .then(function successCallback(response) {
-        window.location = '/' + response.data.type + '/' + response.data.slug;
+        window.location = '/' + response.data.type + '/' + response.data.slug + '/?updated=false';
       }, 
         function errorCallback(response) {
         console.log('error: ',response);

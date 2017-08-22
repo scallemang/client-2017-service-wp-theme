@@ -15,40 +15,40 @@
 	//FORM SAVE - POST
 	function my_acf_save_post( $post_id ) {   
 
-			// // bail early if no ACF data
-			// if( empty($_POST['acf']) ) {		    
-			//     return;
-			// }
+			// bail early if no ACF data
+			if( empty($_POST['acf']) ) {		    
+			    return;
+			}
 
-			// // array of field values
-			// $fields = $_POST['acf'];
+			// array of field values
+			$fields = $_POST['acf'];
+			$user = wp_get_current_user();
 
-			// echo "<script>console.log(".json_encode($fields).");</script>";
+			// var_dump($fields);
 
-			// $user = wp_get_current_user();
+            // Sync User/Post       
+            if(isset($fields['field_5995a94c94b13'])):
+	            wp_update_user(
+	                array(
+	                    'ID'          =>    $user->ID,
+	                    'user_nicename'    =>    $post_id,
+	                    'first_name'    =>    $fields['field_5995a94c94b13'], //office name
+	                    'last_name'    =>    $fields['field_5995a94c954c8'], //primary contact name
+	                    'description'    =>    $fields['field_5995a94c94b13'] . ', ' . $fields['field_5995bd634653e'] //office, address
+	                )
+	            );
+	        elseif(isset($fields['field_5994c9e2cf59a'])):
+	            wp_update_user(
+	                array(
+	                    'ID'          =>    $user->ID,
+	                    'user_nicename'    =>    $post_id,
+	                    'first_name'    =>    $fields['field_5994c9e2cf59a'], //first name
+	                    'last_name'    =>    $fields['field_5994c9e8cf59c'], //last name
+	                    'description'    =>    $fields['field_5994c9e2cf59a'] . ' ' . $fields['field_5994c9e8cf59c'] . ', ' . $fields['field_5994ca01cf59d'] //name, postal
+	                )
+	            );
+	        endif;
 
-         //    // Sync User/Post       
-         //    if($fields['dental_office_name']):
-	        //     wp_update_user(
-	        //         array(
-	        //             'ID'          =>    $user->ID,
-	        //             'user_nicename'    =>    $post_id,
-	        //             'first_name'    =>    $fields['dental_office_name'],
-	        //             'last_name'    =>    $fields['dental_office_name'],
-	        //             'description'    =>    $fields['dental_office_name']
-	        //         )
-	        //     );
-	        // elseif($fields['applicant_first_name']):
-	        //     wp_update_user(
-	        //         array(
-	        //             'ID'          =>    $user->ID,
-	        //             'user_nicename'    =>    $post_id,
-	        //             'first_name'    =>    $fields['applicant_first_name'],
-	        //             'last_name'    =>    $fields['applicant_last_name'],
-	        //             'description'    =>    $fields['dental_office_name']
-	        //         )
-	        //     );
-	        // endif;
 	}
 
 	add_action('acf/save_post', 'my_acf_save_post', 20);

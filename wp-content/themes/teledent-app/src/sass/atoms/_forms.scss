@@ -26,14 +26,27 @@ label {
 			background: $orange;
 			content: '';
 			display: block;
+			z-index: 10;
 		}
 	}
 }
 
-form[name="teledent-registration"] {
+#profile-subnav {
+	display: flex;
+	justify-content: space-between;
+	> li {
+		padding: 14px 4px;
+		flex: 1 1 auto;
+		border: 1px solid #fafafa;
+		text-align: center;
+	}
+}
+
+form[name="teledent-registration"],
+form.acf-form {
 	margin-top: 0;
 	border-top: 0;
-	background: white;
+	background: $gray-lightest;
 	margin-bottom: 0;
 	padding: 0 24px 34px;
 	position: relative;
@@ -43,17 +56,31 @@ form[name="teledent-registration"] {
 		display: block;
 		
 	}
-	fieldset > .control-group {
-		border-bottom: 1px solid rgba($black, 0.1);
-		padding-bottom: 3rem;
+	fieldset {
+		margin-top: 0;
+		padding-top: 3rem;
+		> .control-group {
+			border-bottom: 1px solid rgba($black, 0.1);
+			padding-bottom: 3rem;
+		}
 	}
-	.control-label {
-		font-size: 3rem;
-		display: block;
-		text-align: left;
-		margin-bottom: 10px;
-		padding-bottom: 6px;
-		color: $orange;
+	input[type="email"],
+	input[type="text"] {
+		background: $white;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	.control-label,
+	label[for="radios"] {
+		// font-size: 3rem;
+		// display: block;
+		// text-align: left;
+		// margin-bottom: 10px;
+		// padding-bottom: 6px;
+		// color: $orange;
+
+		font-size: 2rem;
+		margin-bottom: 1.5rem;
 	}
 	.form-group {
 		margin-bottom: 4px;
@@ -62,22 +89,111 @@ form[name="teledent-registration"] {
 		display: block;
 		margin-top: -6px;
 		margin-bottom: 0;
-		color: ($black, 0.4);
+		color: $gray-light;
 		padding-left: 28px;
 		font-size: 14px;
-		font-weight: 900;
+		font-weight: 100;
+		line-height: 1.75rem;
+		margin-top: 0.25rem;
+	}
+	[type="radio"]:checked,
+	[type="radio"]:not(:checked) {
+	    position: absolute;
+	    left: -9999px;
 	}
 
+	[type="radio"]:checked + label,
+	[type="radio"]:not(:checked) + label {
+	    position: relative;
+	    padding-left: 28px;
+	    cursor: pointer;
+	    line-height: 20px;
+	    display: inline-block;
+	    color: #666;
+	}
 	[type="radio"]:checked + label:before,
 	[type="radio"]:not(:checked) + label:before {
-		content: '';
+	    content: '';
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 20px;
+	    height: 20px;
+	    border: 1px solid #ddd;
+	    border-radius: 100%;
+	    background: #fff;
+	}
+	[type="radio"]:checked + label:after,
+	[type="radio"]:not(:checked) + label:after {
+	    content: '';
+	    width: 12px;
+	    height: 12px;
+	    background: $blue;
+	    position: absolute;
+	    top: 4px;
+	    left: 4px;
+	    border-radius: 100%;
+	    -webkit-transition: all 0.2s ease;
+	    transition: all 0.2s ease;
+	}
+	[type="radio"]:not(:checked) + label:after {
+	    opacity: 0;
+	    -webkit-transform: scale(0);
+	    transform: scale(0);
+	}
+	[type="radio"]:checked + label:after {
+	    opacity: 1;
+	    -webkit-transform: scale(1);
+	    transform: scale(1);
+	}
+	button.btn {
+		border-radius: 50px;
+		margin: 0 auto;
+		display: block;
+		padding: 8px 24px;
+		font-weight: 900;
+		background: $orange;
+		transition: background 300ms;
+		background-image: none;
+		&.btn-success {
+			background: #5cb85c;
+			background-image: none;
+			transition: background 300ms;
+		}
+	}
+	@media (min-width: $large) {
+		.radio {
+			float: left;
+			width: 50%;
+			padding: 7px 12px;
+		}
+	}
+}
+
+form.acf-form {
+	.acf-field {
+		position: relative;
+	}
+	.acf-field-text .acf-label {
 		position: absolute;
-		left: 0;
-		top: 0;
-		width: 20px;
-		height: 20px;
-		border: 1px solid #ddd;
-		border-radius: 100%;
-		background: $white;
+		z-index: 10;
+		font-size: 16px;
+		line-height: 12px;
+		top: 40px;
+		left: 22px;
+		color: lighten($blue, 20%);
+		transition: all 250ms;
+		&.acf-label--active {
+			font-size: 10px;
+			top: 19px;
+			left: 19px;
+		}
+	}
+	input[type="text"] {
+		font-size: 16px;
+		line-height: 20px;
+		padding-top: 20px !important;
+		height: 56px;
+		padding-bottom: 16px !important;
 	}
 }

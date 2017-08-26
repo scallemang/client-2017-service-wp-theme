@@ -67,23 +67,27 @@
 						  	class="col-sm-12">What services are you looking for?</label>
 						  <div class=" col-sm-12 required">
 						    <div class="radio">
+						      <input type="radio" 
+									ng-model="user.user_type" 
+									value="applicant"
+									id="applicant" />
 						      <label class="radio-custom" 
 						      	data-initialize="radio" 
-						      	id="radios-applicant">
-						        <input type="radio" 
-									ng-model="user.user_type" 
-									value="applicant"/>
+						      	id="radios-applicant"
+						      	for="applicant" >
 						        <span class="radio-label">I am an Applicant. </span>
 						      </label>
 						      <p class="help-block">I am looking for temporary or permanent work in the dental field.</p>
 						    </div>
 						    <div class="radio">
+						      <input type="radio" 
+									ng-model="user.user_type" 
+									value="office"
+									id="office" />
 						      <label class="radio-custom" 
 						      	data-initialize="radio" 
-						      	id="radios-office">
-						        <input type="radio" 
-									ng-model="user.user_type" 
-									value="office"/>
+						      	id="radios-office"
+						      	for="office">
 						        <span class="radio-label">I work at a Dental Office. </span>
 						      </label>
 						      <p class="help-block">I am looking to hire someone to work in our office.</p>

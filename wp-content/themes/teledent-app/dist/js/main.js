@@ -1,3 +1,4 @@
+
 angular.module('teledent', [])
 .controller('RegistrationController', 
     ['$scope', '$http', function($scope, $http) {

@@ -129,11 +129,11 @@ p {
 
 /* line 158, node_modules/simplegrid/simple-grid.scss */
 .col-1-sm {
-  width: 4.33333%; }
+  width: 4.3333333333%; }
 
 /* line 159, node_modules/simplegrid/simple-grid.scss */
 .col-2-sm {
-  width: 12.66667%; }
+  width: 12.6666666667%; }
 
 /* line 160, node_modules/simplegrid/simple-grid.scss */
 .col-3-sm {
@@ -141,11 +141,11 @@ p {
 
 /* line 161, node_modules/simplegrid/simple-grid.scss */
 .col-4-sm {
-  width: 29.33333%; }
+  width: 29.3333333333%; }
 
 /* line 162, node_modules/simplegrid/simple-grid.scss */
 .col-5-sm {
-  width: 37.66667%; }
+  width: 37.6666666667%; }
 
 /* line 163, node_modules/simplegrid/simple-grid.scss */
 .col-6-sm {
@@ -153,11 +153,11 @@ p {
 
 /* line 164, node_modules/simplegrid/simple-grid.scss */
 .col-7-sm {
-  width: 54.33333%; }
+  width: 54.3333333333%; }
 
 /* line 165, node_modules/simplegrid/simple-grid.scss */
 .col-8-sm {
-  width: 62.66667%; }
+  width: 62.6666666667%; }
 
 /* line 166, node_modules/simplegrid/simple-grid.scss */
 .col-9-sm {
@@ -165,11 +165,11 @@ p {
 
 /* line 167, node_modules/simplegrid/simple-grid.scss */
 .col-10-sm {
-  width: 79.33333%; }
+  width: 79.3333333333%; }
 
 /* line 168, node_modules/simplegrid/simple-grid.scss */
 .col-11-sm {
-  width: 87.66667%; }
+  width: 87.6666666667%; }
 
 /* line 169, node_modules/simplegrid/simple-grid.scss */
 .col-12-sm {
@@ -178,11 +178,11 @@ p {
 @media only screen and (min-width: 45em) {
   /* line 172, node_modules/simplegrid/simple-grid.scss */
   .col-1 {
-    width: 4.33333%; }
+    width: 4.3333333333%; }
 
   /* line 173, node_modules/simplegrid/simple-grid.scss */
   .col-2 {
-    width: 12.66667%; }
+    width: 12.6666666667%; }
 
   /* line 174, node_modules/simplegrid/simple-grid.scss */
   .col-3 {
@@ -190,11 +190,11 @@ p {
 
   /* line 175, node_modules/simplegrid/simple-grid.scss */
   .col-4 {
-    width: 29.33333%; }
+    width: 29.3333333333%; }
 
   /* line 176, node_modules/simplegrid/simple-grid.scss */
   .col-5 {
-    width: 37.66667%; }
+    width: 37.6666666667%; }
 
   /* line 177, node_modules/simplegrid/simple-grid.scss */
   .col-6 {
@@ -202,11 +202,11 @@ p {
 
   /* line 178, node_modules/simplegrid/simple-grid.scss */
   .col-7 {
-    width: 54.33333%; }
+    width: 54.3333333333%; }
 
   /* line 179, node_modules/simplegrid/simple-grid.scss */
   .col-8 {
-    width: 62.66667%; }
+    width: 62.6666666667%; }
 
   /* line 180, node_modules/simplegrid/simple-grid.scss */
   .col-9 {
@@ -214,11 +214,11 @@ p {
 
   /* line 181, node_modules/simplegrid/simple-grid.scss */
   .col-10 {
-    width: 79.33333%; }
+    width: 79.3333333333%; }
 
   /* line 182, node_modules/simplegrid/simple-grid.scss */
   .col-11 {
-    width: 87.66667%; }
+    width: 87.6666666667%; }
 
   /* line 183, node_modules/simplegrid/simple-grid.scss */
   .col-12 {
